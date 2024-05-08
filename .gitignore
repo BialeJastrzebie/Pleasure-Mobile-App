@@ -21,6 +21,8 @@ lib/generated_plugin_registrant.dart
 
 .vscode/
 
+.idea/
+
 # Android related
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
