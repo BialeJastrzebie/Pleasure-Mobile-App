@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 
-import '../widgets/MenuListTile.dart';
+import '../widgets/menu_list_tile.dart';
 
 class BaseView extends StatefulWidget {
   const BaseView({super.key});
@@ -22,9 +21,9 @@ class _BaseViewState extends State<BaseView> {
         height: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Colors.white54, Colors.white54.withOpacity(0.2)])),
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Colors.white12, Colors.white12.withOpacity(0.3)])),
       ),
       controller: _drawerController,
       animationCurve: Curves.easeInOut,
@@ -54,27 +53,40 @@ class _BaseViewState extends State<BaseView> {
                   color: Colors.amber,
                   shape: BoxShape.circle,
                 ),
-                child: const FlutterLogo(),
+                child: const Image(
+                  image: AssetImage("lib/app/shared/images/biała relax.jpg"),
+                  fit: BoxFit.cover,
+                ),
               ),
               MenuListTile(
                 onTap: () {},
                 leadingIcon: const Icon(Icons.home),
-                title: const Text("Strona główna"),
+                title: "POCZĄTEK",
               ),
               MenuListTile(
                 onTap: () {},
                 leadingIcon: const Icon(Icons.map),
-                title: const Text("Mapa"),
+                title: "MAPA",
               ),
               MenuListTile(
                 onTap: () {},
-                leadingIcon: const Icon(Icons.schedule),
-                title: const Text("Plan zajęć"),
+                leadingIcon: const Icon(Icons.calendar_view_day),
+                title: "PLAN ZAJĘĆ",
               ),
               MenuListTile(
                 onTap: () {},
                 leadingIcon: const Icon(Icons.timelapse_sharp),
-                title: const Text("Z-Plan"),
+                title: "Z-PLAN",
+              ),
+              MenuListTile(
+                onTap: () {},
+                leadingIcon: const Icon(Icons.people_alt_outlined),
+                title: "ZNAJOMI",
+              ),
+              MenuListTile(
+                onTap: () {},
+                leadingIcon: const Icon(Icons.settings),
+                title: "USTAWIENIA",
               ),
               const Spacer(),
               DefaultTextStyle(
@@ -86,7 +98,8 @@ class _BaseViewState extends State<BaseView> {
                     margin: const EdgeInsets.symmetric(
                       vertical: 16,
                     ),
-                    child: const Text("Privacy Policy"),
+                    child: const Text(
+                        "        © 2024 PŁeasure\nWszelkie prawa zastrzeżone"),
                   ))
             ],
           ),
@@ -94,7 +107,7 @@ class _BaseViewState extends State<BaseView> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Base"),
+          title: const Text("Base"),
           leading: IconButton(
               onPressed: _handleMenuButton,
               icon: ValueListenableBuilder<AdvancedDrawerValue>(
@@ -109,7 +122,11 @@ class _BaseViewState extends State<BaseView> {
                     );
                   })),
         ),
-        body: Container(),
+        body: Container(
+          child: const Center(
+            child: Text("Base View"),
+          ),
+        ),
       ),
     );
   }

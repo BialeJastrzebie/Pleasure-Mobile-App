@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pleasure_mobile_app/app/shared/utils/baseView.dart';
+import 'package:pleasure_mobile_app/app/shared/utils/base_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

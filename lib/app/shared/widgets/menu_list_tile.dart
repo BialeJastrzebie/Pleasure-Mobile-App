@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../themes/theme.dart';
 
 class MenuListTile extends StatelessWidget {
   final Icon leadingIcon;
-  final Text title;
+  final String title;
+
   final VoidCallback onTap;
 
   const MenuListTile({
@@ -15,7 +17,7 @@ class MenuListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 30.0),
+      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
       child: Container(
         decoration: BoxDecoration(
           color: const Color.fromRGBO(232, 232, 232, 1.0),
@@ -27,9 +29,16 @@ class MenuListTile extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                leadingIcon,
+                Icon(leadingIcon.icon,
+                size: 30.0,
+                color: secondaryColor,
+                ),
                 const SizedBox(width: 8.0),
-                title,
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 24,
+                      fontWeight: FontWeight.w600, color: secondaryColor),
+                ),
               ],
             ),
           ),

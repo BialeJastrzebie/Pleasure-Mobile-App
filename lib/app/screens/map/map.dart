@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/app/shared/utils/baseView.dart';
+import '/app/shared/utils/base_view.dart';
 
 class MapPage extends StatelessWidget {
   const MapPage({super.key});

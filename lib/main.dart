@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'app/screens/home/home.dart';
 import 'app/screens/map/map.dart';
 import 'app/screens/schedule/schedule.dart';
+import 'app/shared/themes/theme.dart';
 
 
 void main() {
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'PLeasure',
       theme: ThemeData(
-        brightness: Brightness.dark,
+        scaffoldBackgroundColor: backgroundColor,
+        fontFamily: 'Poppins',
       ),
       initialRoute: '/', // This is the route that the app opens first.
       routes: {
