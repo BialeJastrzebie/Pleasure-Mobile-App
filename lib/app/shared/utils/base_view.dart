@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 
+import '../themes/theme.dart';
 import '../widgets/menu_list_tile.dart';
 
 class BaseView extends StatefulWidget {
@@ -23,7 +25,7 @@ class _BaseViewState extends State<BaseView> {
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
-                colors: [Colors.white12, Colors.white12.withOpacity(0.3)])),
+                colors: [secondaryColor.withOpacity(0.6), secondaryColor])),
       ),
       controller: _drawerController,
       animationCurve: Curves.easeInOut,
@@ -45,18 +47,17 @@ class _BaseViewState extends State<BaseView> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Container(
-                width: 120,
-                height: 120,
-                margin: const EdgeInsets.only(top: 20, bottom: 60),
-                clipBehavior: Clip.antiAlias,
-                decoration: const BoxDecoration(
-                  color: Colors.amber,
-                  shape: BoxShape.circle,
-                ),
-                child: const Image(
-                  image: AssetImage("lib/app/shared/images/biała relax.jpg"),
-                  fit: BoxFit.cover,
-                ),
+                  width: 120,
+                  height: 120,
+                  margin: const EdgeInsets.only(top: 20, bottom: 20),
+                  clipBehavior: Clip.antiAlias,
+                  decoration: const BoxDecoration(
+                    color: backgroundColor,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Image(
+                    image: AssetImage("images/biała_relax.png"),
+                  )
               ),
               MenuListTile(
                 onTap: () {},
@@ -83,20 +84,32 @@ class _BaseViewState extends State<BaseView> {
                 leadingIcon: const Icon(Icons.people_alt_outlined),
                 title: "ZNAJOMI",
               ),
-              MenuListTile(
-                onTap: () {},
-                leadingIcon: const Icon(Icons.settings),
-                title: "USTAWIENIA",
-              ),
               const Spacer(),
+              Padding( // Add this widget to create space from the bottom
+                padding: const EdgeInsets.only(bottom: 5),
+                child: Column(
+                  children: [
+                    MenuListTile(
+                      onTap: () {},
+                      leadingIcon: const Icon(Icons.settings),
+                      title: "USTAWIENIA",
+                    ),
+                    MenuListTile(
+                      onTap: () {},
+                      leadingIcon: const Icon(Icons.help),
+                      title: "POMOC",
+                    ),
+                  ],
+                ),
+              ),
               DefaultTextStyle(
                   style: const TextStyle(
-                    fontSize: 14,
+                    fontSize: 12,
                     color: Colors.white54,
                   ),
                   child: Container(
                     margin: const EdgeInsets.symmetric(
-                      vertical: 16,
+                      vertical: 15,
                     ),
                     child: const Text(
                         "        © 2024 PŁeasure\nWszelkie prawa zastrzeżone"),
@@ -107,7 +120,31 @@ class _BaseViewState extends State<BaseView> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Base"),
+          title: Row(
+            children: [
+              Spacer(), // push the title to the right
+              GestureDetector(
+                // Wrap the Text widget with GestureDetector
+                onTap: () {
+                  print('PŁeasure text clicked');
+                },
+                child: const Text(
+                  "PŁeasure", //title
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(0.0, 3.0),
+                        blurRadius: 5.0,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
           leading: IconButton(
               onPressed: _handleMenuButton,
               icon: ValueListenableBuilder<AdvancedDrawerValue>(
@@ -116,16 +153,26 @@ class _BaseViewState extends State<BaseView> {
                     return AnimatedSwitcher(
                       duration: const Duration(milliseconds: 250),
                       child: Icon(
+                        size: 40,
                         value.visible ? Icons.clear : Icons.menu,
                         key: ValueKey<bool>(value.visible),
                       ),
                     );
                   })),
         ),
-        body: Container(
-          child: const Center(
-            child: Text("Base View"),
-          ),
+        body: const Column(
+          children: [
+            InnerShadow(
+              blur: 3,
+              color: Color.fromRGBO(0, 0, 0, 1),
+              offset: Offset(0, 0),
+              child: Divider(
+                height: 10,
+                thickness: 10,
+                color: secondaryColor,
+              ),
+            ),
+          ],
         ),
       ),
     );

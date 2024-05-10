@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_advanced_drawer:
   google_fonts: ^6.2.1
+  inner_shadow_widget: ^0.0.3
 
 dev_dependencies:
   flutter_test:
@@ -139,4 +140,4 @@ flutter:
     - android/.gradle/nb-cache/android-2044483511/
     - android/.gradle/buildOutputCleanup/
     - android/app/build.gradle
-
+    - images/
