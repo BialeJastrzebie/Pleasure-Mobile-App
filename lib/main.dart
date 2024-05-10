@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: backgroundColor,
         appBarTheme: AppBarTheme.of(context).copyWith(
           backgroundColor: backgroundColor,
-          elevation: 30.0,
+          elevation: 5.0,
         ),
       ),
 
@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => const HomePage(), // Home route
         '/map': (context) => const MapPage(), // Map route
         '/schedule': (context) => const SchedulePage(), // Schedule route
-
       },
     );
   }

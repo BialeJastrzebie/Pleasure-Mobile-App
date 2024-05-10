@@ -6,7 +6,9 @@ import '../themes/theme.dart';
 import '../widgets/menu_list_tile.dart';
 
 class BaseView extends StatefulWidget {
-  const BaseView({super.key});
+  final Widget body;
+
+  const BaseView({super.key, required this.body});
 
   @override
   State<BaseView> createState() => _BaseViewState();
@@ -57,8 +59,7 @@ class _BaseViewState extends State<BaseView> {
                   ),
                   child: const Image(
                     image: AssetImage("images/biała_relax.png"),
-                  )
-              ),
+                  )),
               MenuListTile(
                 onTap: () {},
                 leadingIcon: const Icon(Icons.home),
@@ -85,7 +86,8 @@ class _BaseViewState extends State<BaseView> {
                 title: "ZNAJOMI",
               ),
               const Spacer(),
-              Padding( // Add this widget to create space from the bottom
+              Padding(
+                // Add this widget to create space from the bottom
                 padding: const EdgeInsets.only(bottom: 5),
                 child: Column(
                   children: [
@@ -120,60 +122,59 @@ class _BaseViewState extends State<BaseView> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Row(
-            children: [
-              Spacer(), // push the title to the right
-              GestureDetector(
-                // Wrap the Text widget with GestureDetector
-                onTap: () {
-                  print('PŁeasure text clicked');
-                },
-                child: const Text(
-                  "PŁeasure", //title
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                    shadows: [
-                      Shadow(
-                        offset: Offset(0.0, 3.0),
-                        blurRadius: 5.0,
-                        color: Color.fromARGB(255, 0, 0, 0),
-                      ),
-                    ],
+            title: Row(
+              children: [
+                const Spacer(), // push the title to the right
+                GestureDetector(
+                  // Wrap the Text widget with GestureDetector
+                  onTap: () {
+                    print('PŁeasure text clicked');
+                  },
+                  child: const Text(
+                    "PŁeasure", //title
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                      shadows: [
+                        Shadow(
+                          offset: Offset(0.0, 3.0),
+                          blurRadius: 5.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          leading: IconButton(
-              onPressed: _handleMenuButton,
-              icon: ValueListenableBuilder<AdvancedDrawerValue>(
-                  valueListenable: _drawerController,
-                  builder: (_, value, __) {
-                    return AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 250),
-                      child: Icon(
-                        size: 40,
-                        value.visible ? Icons.clear : Icons.menu,
-                        key: ValueKey<bool>(value.visible),
-                      ),
-                    );
-                  })),
-        ),
-        body: const Column(
-          children: [
-            InnerShadow(
-              blur: 3,
-              color: Color.fromRGBO(0, 0, 0, 1),
-              offset: Offset(0, 0),
-              child: Divider(
-                height: 10,
-                thickness: 10,
-                color: secondaryColor,
-              ),
+              ],
             ),
-          ],
-        ),
+            leading: IconButton(
+                onPressed: _handleMenuButton,
+                icon: ValueListenableBuilder<AdvancedDrawerValue>(
+                    valueListenable: _drawerController,
+                    builder: (_, value, __) {
+                      return AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 250),
+                        child: Icon(
+                          size: 35,
+                          value.visible ? Icons.clear : Icons.menu,
+                          key: ValueKey<bool>(value.visible),
+                        ),
+                      );
+                    })),
+            bottom: const PreferredSize(
+              preferredSize: Size.fromHeight(0.0),
+              child: InnerShadow(
+                blur: 3,
+                color: Color.fromRGBO(0, 0, 0, 1),
+                offset: Offset(0, 0),
+                child: Divider(
+                  height: 10,
+                  thickness: 10,
+                  color: secondaryColor,
+                ),
+              ),
+            )),
+        body: widget.body,
       ),
     );
   }

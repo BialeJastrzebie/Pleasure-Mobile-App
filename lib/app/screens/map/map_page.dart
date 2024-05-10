@@ -6,6 +6,10 @@ class MapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BaseView();
+    return const BaseView(
+      body: Center(
+        child: Text('Map goes here'),
+      )
+    );
   }
 }
