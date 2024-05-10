@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'app/screens/home/home.dart';
-import 'app/screens/map/map.dart';
-import 'app/screens/schedule/schedule.dart';
+import 'app/screens/home/home_page.dart';
+import 'app/screens/map/map_page.dart';
+import 'app/screens/schedule/schedule_page.dart';
 import 'app/shared/themes/theme.dart';
 import 'package:flutter/services.dart';
 
