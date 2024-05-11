@@ -1,16 +1,13 @@
 # pleasure_mobile_app
 
-A new Flutter project for students.
+Welcome to Pleasure, a new Flutter project designed for students.
 
-## Getting Started
+Pleasure is an app that aims to enhance the student experience by offering a variety of features:
 
-This project is a starting point for a Flutter application.
+- *Exploring Map:* Students can browse a map featuring locations of interest tailored for them. These locations offer various discounts and deals exclusively for students.
 
-A few resources to get you started if this is your first Flutter project:
+- *Customizable Schedule:* Users can set up their own class schedules within the app, making it easier to manage their academic commitments.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- *Integrated Friend Plans:* By adding friends within the app, users can create and share integrated plans, facilitating coordination and socialization.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Stay tuned for updates and enhancements as we continue to develop Pleasure to cater to the needs and interests of students everywhere!
