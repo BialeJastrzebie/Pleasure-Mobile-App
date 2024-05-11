@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void animateScreenChange(BuildContext context, StatelessWidget screen, Curve typeOfCurve) {
+void animateScreenChange(BuildContext context, Widget screen, Curve typeOfCurve) {
   Navigator.push(context, PageRouteBuilder(
     pageBuilder: (context, animation1, animation2) => screen,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
