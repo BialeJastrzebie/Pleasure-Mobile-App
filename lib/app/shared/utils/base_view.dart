@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
+
+import '../../screens/map/map_page.dart';
+import '../../screens/schedule/schedule_page.dart';
+import 'package:pleasure_mobile_app/app/screens/friends/friends_page.dart';
 import 'package:pleasure_mobile_app/app/screens/home/home_page.dart';
+import 'package:pleasure_mobile_app/app/screens/integrated_schedule/integrated_schedule_page.dart';
 import 'package:pleasure_mobile_app/app/shared/utils/changeScreenAnimation.dart';
 
 import '../themes/theme.dart';
@@ -64,35 +69,40 @@ class _BaseViewState extends State<BaseView> {
                   )),
               MenuListTile(
                 onTap: () {
-                  Navigator.popAndPushNamed(context, '/home');
+                  animateScreenChange(context, const HomePage(),
+                      Curves.fastLinearToSlowEaseIn);
                 },
                 leadingIcon: const Icon(Icons.home),
                 title: "POCZĄTEK",
               ),
               MenuListTile(
                 onTap: () {
-                  Navigator.popAndPushNamed(context, '/map');
+                  animateScreenChange(context, const MapPage(),
+                      Curves.fastLinearToSlowEaseIn);
                 },
                 leadingIcon: const Icon(Icons.map),
                 title: "MAPA",
               ),
               MenuListTile(
                 onTap: () {
-                  Navigator.popAndPushNamed(context, '/schedule');
+                  animateScreenChange(context, const SchedulePage(),
+                      Curves.fastLinearToSlowEaseIn);
                 },
                 leadingIcon: const Icon(Icons.calendar_view_day),
                 title: "PLAN ZAJĘĆ",
               ),
               MenuListTile(
                 onTap: () {
-                  Navigator.popAndPushNamed(context, '/integrated_schedule');
+                  animateScreenChange(context, const IntegratedSchedulePage(),
+                      Curves.fastLinearToSlowEaseIn);
                 },
                 leadingIcon: const Icon(Icons.timelapse_sharp),
                 title: "Z-PLAN",
               ),
               MenuListTile(
                 onTap: () {
-                  Navigator.popAndPushNamed(context, '/friends');
+                  animateScreenChange(context, const FriendsPage(),
+                      Curves.fastLinearToSlowEaseIn);
                 },
                 leadingIcon: const Icon(Icons.people_alt_outlined),
                 title: "ZNAJOMI",
@@ -105,14 +115,16 @@ class _BaseViewState extends State<BaseView> {
                   children: [
                     MenuListTile(
                       onTap: () {
-                        Navigator.popAndPushNamed(context, '/settings');
+                        animateScreenChange(context, const HomePage(),
+                            Curves.fastLinearToSlowEaseIn);
                       },
                       leadingIcon: const Icon(Icons.settings),
                       title: "USTAWIENIA",
                     ),
                     MenuListTile(
                       onTap: () {
-                        Navigator.popAndPushNamed(context, '/help');
+                        animateScreenChange(context, const HomePage(),
+                            Curves.fastLinearToSlowEaseIn);
                       },
                       leadingIcon: const Icon(Icons.help),
                       title: "POMOC",
