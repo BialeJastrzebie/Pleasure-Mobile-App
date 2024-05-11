@@ -144,7 +144,8 @@ class _BaseViewState extends State<BaseView> {
                 GestureDetector(
                   // Wrap the Text widget with GestureDetector
                   onTap: () {
-                    animateScreenChange(context, const HomePage());
+                    animateScreenChange(context, const HomePage(),
+                        Curves.fastLinearToSlowEaseIn);
                   },
                   child: const Text(
                     "PŁeasure", //title
