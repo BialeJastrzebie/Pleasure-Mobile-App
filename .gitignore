@@ -20,7 +20,7 @@ lib/generated_plugin_registrant.dart
 #pubspec.lock
 
 .vscode/
-.env
+.env/
 .idea/
 generated/
 # Android related
