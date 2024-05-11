@@ -69,16 +69,16 @@ class _BaseViewState extends State<BaseView> {
                   )),
               MenuListTile(
                 onTap: () {
-                  animateScreenChange(context, const HomePage(),
-                      Curves.fastLinearToSlowEaseIn);
+                  animateScreenChange(
+                      context, const HomePage(), Curves.fastLinearToSlowEaseIn);
                 },
                 leadingIcon: const Icon(Icons.home),
                 title: "POCZĄTEK",
               ),
               MenuListTile(
                 onTap: () {
-                  animateScreenChange(context, const MapPage(),
-                      Curves.fastLinearToSlowEaseIn);
+                  animateScreenChange(
+                      context, const MapPage(), Curves.fastLinearToSlowEaseIn);
                 },
                 leadingIcon: const Icon(Icons.map),
                 title: "MAPA",
