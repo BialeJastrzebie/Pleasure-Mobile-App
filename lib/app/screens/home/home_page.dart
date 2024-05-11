@@ -3,7 +3,7 @@ import 'package:pleasure_mobile_app/app/screens/integrated_schedule/integrated_s
 import 'package:pleasure_mobile_app/app/shared/utils/base_view.dart';
 import 'package:pleasure_mobile_app/app/screens/home/widgets/button.dart';
 
-import '../../shared/utils/changeScreenAnimation.dart';
+import '../../shared/utils/change_screen_animation.dart';
 import '../friends/friends_page.dart';
 import '../map/map_page.dart';
 import '../schedule/schedule_page.dart';

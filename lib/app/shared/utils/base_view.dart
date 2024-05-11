@@ -7,7 +7,7 @@ import '../../screens/schedule/schedule_page.dart';
 import 'package:pleasure_mobile_app/app/screens/friends/friends_page.dart';
 import 'package:pleasure_mobile_app/app/screens/home/home_page.dart';
 import 'package:pleasure_mobile_app/app/screens/integrated_schedule/integrated_schedule_page.dart';
-import 'package:pleasure_mobile_app/app/shared/utils/changeScreenAnimation.dart';
+import 'package:pleasure_mobile_app/app/shared/utils/change_screen_animation.dart';
 
 import '../themes/theme.dart';
 import '../widgets/menu_list_tile.dart';
