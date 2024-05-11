@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
+import 'package:pleasure_mobile_app/app/screens/home/home_page.dart';
+import 'package:pleasure_mobile_app/app/shared/utils/changeScreenAnimation.dart';
 
 import '../themes/theme.dart';
 import '../widgets/menu_list_tile.dart';
@@ -142,7 +144,7 @@ class _BaseViewState extends State<BaseView> {
                 GestureDetector(
                   // Wrap the Text widget with GestureDetector
                   onTap: () {
-                    Navigator.popAndPushNamed(context, '/home');
+                    animateScreenChange(context, const HomePage());
                   },
                   child: const Text(
                     "PŁeasure", //title
