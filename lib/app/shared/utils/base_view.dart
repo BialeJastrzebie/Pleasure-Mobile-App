@@ -162,7 +162,7 @@ class _BaseViewState extends State<BaseView> {
                   child: const Text(
                     "PŁeasure", //title
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.w400,
                       shadows: [
                         Shadow(
@@ -184,21 +184,21 @@ class _BaseViewState extends State<BaseView> {
                       return AnimatedSwitcher(
                         duration: const Duration(milliseconds: 250),
                         child: Icon(
-                          size: 35,
+                          size: 30,
                           value.visible ? Icons.clear : Icons.menu,
                           key: ValueKey<bool>(value.visible),
                         ),
                       );
                     })),
             bottom: const PreferredSize(
-              preferredSize: Size.fromHeight(0.0),
+              preferredSize: Size.fromHeight(-10.0),
               child: InnerShadow(
-                blur: 3,
+                blur: 2,
                 color: Color.fromRGBO(0, 0, 0, 1),
                 offset: Offset(0, 0),
                 child: Divider(
-                  height: 10,
-                  thickness: 10,
+                  height: 8,
+                  thickness: 8,
                   color: secondaryColor,
                 ),
               ),
