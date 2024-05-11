@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^6.2.1
   inner_shadow_widget: ^0.0.3
   google_maps_flutter: ^2.6.1
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -115,30 +116,14 @@ flutter:
     - android/gradle/
     - android/gradle/wrapper/
     - android/.gradle/
-    - android/.gradle/7.3.3/
-    - android/.gradle/7.3.3/checksums/
-    - android/.gradle/7.3.3/fileHashes/
-    - android/.gradle/7.3.3/fileChanges/
-    - android/.gradle/7.3.3/vcsMetadata/
-    - android/.gradle/7.3.3/dependencies-accessors/
-    - android/.gradle/7.4.2/
-    - android/.gradle/7.4.2/checksums/
-    - android/.gradle/7.4.2/fileHashes/
-    - android/.gradle/7.4.2/fileChanges/
-    - android/.gradle/7.4.2/vcsMetadata/
-    - android/.gradle/7.4.2/executionHistory/
-    - android/.gradle/7.4.2/dependencies-accessors/
     - android/.gradle/7.6.3/
     - android/.gradle/7.6.3/checksums/
     - android/.gradle/7.6.3/fileHashes/
     - android/.gradle/7.6.3/fileChanges/
     - android/.gradle/7.6.3/vcsMetadata/
-    - android/.gradle/7.6.3/executionHistory/
     - android/.gradle/7.6.3/dependencies-accessors/
     - android/.gradle/vcs-1/
-    - android/.gradle/nb-cache/
-    - android/.gradle/nb-cache/trust/
-    - android/.gradle/nb-cache/android-2044483511/
     - android/.gradle/buildOutputCleanup/
     - android/app/build.gradle
     - images/
+    - .env

@@ -5,13 +5,15 @@ import 'app/screens/integrated_schedule/integrated_schedule_page.dart';
 import 'app/screens/schedule/schedule_page.dart';
 import 'app/shared/themes/theme.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown])
       .then((_) => runApp(const MyApp()),
   );
+  await dotenv.load(fileName: ".env");
 }
 
 class MyApp extends StatelessWidget {

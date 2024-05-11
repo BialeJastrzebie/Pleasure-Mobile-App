@@ -20,9 +20,9 @@ lib/generated_plugin_registrant.dart
 #pubspec.lock
 
 .vscode/
-
+.env
 .idea/
-
+generated/
 # Android related
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
@@ -31,6 +31,7 @@ lib/generated_plugin_registrant.dart
 **/android/gradlew.bat
 **/android/key.properties
 **/android/local.properties
+**/android/secret.properties
 **/android/**/GeneratedPluginRegistrant.java
 
 # iOS/XCode related
