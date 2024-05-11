@@ -61,27 +61,37 @@ class _BaseViewState extends State<BaseView> {
                     image: AssetImage("images/biała_relax.png"),
                   )),
               MenuListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.popAndPushNamed(context, '/home');
+                },
                 leadingIcon: const Icon(Icons.home),
                 title: "POCZĄTEK",
               ),
               MenuListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.popAndPushNamed(context, '/map');
+                },
                 leadingIcon: const Icon(Icons.map),
                 title: "MAPA",
               ),
               MenuListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.popAndPushNamed(context, '/schedule');
+                },
                 leadingIcon: const Icon(Icons.calendar_view_day),
                 title: "PLAN ZAJĘĆ",
               ),
               MenuListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.popAndPushNamed(context, '/integrated_schedule');
+                },
                 leadingIcon: const Icon(Icons.timelapse_sharp),
                 title: "Z-PLAN",
               ),
               MenuListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.popAndPushNamed(context, '/friends');
+                },
                 leadingIcon: const Icon(Icons.people_alt_outlined),
                 title: "ZNAJOMI",
               ),
@@ -92,12 +102,16 @@ class _BaseViewState extends State<BaseView> {
                 child: Column(
                   children: [
                     MenuListTile(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.popAndPushNamed(context, '/settings');
+                      },
                       leadingIcon: const Icon(Icons.settings),
                       title: "USTAWIENIA",
                     ),
                     MenuListTile(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.popAndPushNamed(context, '/help');
+                      },
                       leadingIcon: const Icon(Icons.help),
                       title: "POMOC",
                     ),
@@ -128,7 +142,7 @@ class _BaseViewState extends State<BaseView> {
                 GestureDetector(
                   // Wrap the Text widget with GestureDetector
                   onTap: () {
-                    print('PŁeasure text clicked');
+                    Navigator.popAndPushNamed(context, '/home');
                   },
                   child: const Text(
                     "PŁeasure", //title
