@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pleasure_mobile_app/app/screens/integrated_schedule/integrated_schedule_page.dart';
 import 'package:pleasure_mobile_app/app/shared/utils/base_view.dart';
 import 'package:pleasure_mobile_app/app/screens/home/widgets/button.dart';
+
+import '../../shared/utils/changeScreenAnimation.dart';
+import '../friends/friends_page.dart';
+import '../map/map_page.dart';
+import '../schedule/schedule_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,28 +23,28 @@ class HomePage extends StatelessWidget {
             Button(
                 text: "MAPA",
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, '/map');
+                  animateScreenChange(context, const MapPage());
                 }
             ),
             const Spacer(),
             Button(
                 text: " PLAN \nZAJĘĆ",
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, '/schedule');
+                  animateScreenChange(context, const SchedulePage());
                 }
             ),
             const Spacer(),
             Button(
                 text: "Z-PLAN",
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, '/integrated_schedule');
+                  animateScreenChange(context, const IntegratedSchedulePage());
                 }
             ),
             const Spacer(),
             Button(
                 text: "ZNAJOMI",
                 onPressed: () {
-                  // Navigator.popAndPushNamed(context, '/friends');
+                  animateScreenChange(context, const FriendsPage());
                 }
             ),
             const Spacer(),
