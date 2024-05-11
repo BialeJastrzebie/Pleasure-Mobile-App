@@ -38,6 +38,7 @@ dependencies:
   flutter_advanced_drawer:
   google_fonts: ^6.2.1
   inner_shadow_widget: ^0.0.3
+  google_maps_flutter: ^2.6.1
 
 dev_dependencies:
   flutter_test:
