@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets/search_input_box.dart';
+import 'package:pleasure_mobile_app/app/shared/themes/theme.dart';
 
 class DragFilter extends StatefulWidget {
   const DragFilter({super.key});
@@ -18,34 +20,55 @@ class _DragFilterState extends State<DragFilter> {
       builder: (BuildContext context, ScrollController scrollController) {
         return Container(
           decoration: const BoxDecoration(
-            color: Colors.white,
+            color: Colors.transparent,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(24),
-              topRight: Radius.circular(24),
+              topLeft: Radius.circular(40),
+              topRight: Radius.circular(40),
             ),
           ),
           child: ListView(
             controller: scrollController,
             children: <Widget>[
-              const SearchInputBox(),
-              Center(
-                child: Container(
-                  width: 30,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(12),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 0.5),
+                child: Center(
+                  child: InnerShadow(
+                    blur: 2,
+                    color: Colors.black.withOpacity(0.8),
+                    offset: const Offset(0, 0),
+                    child: Container(
+                      // draggable divider
+                      width: 180,
+                      height: 7,
+                      decoration: const BoxDecoration(
+                        color: secondaryColor,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-              // The content you want to show when the sheet is pulled up goes here
-              Container(
-                height: MediaQuery.of(context).size.height * 0.8,
-                color: Colors.red,
-                child: const Center(
-                  child: Text('Draggable sheet content'),
+              const Padding(
+                padding: EdgeInsets.all(5),
+                child: SearchInputBox(),
+              ),
+
+              // The content in the sheet
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  color: backgroundColor,
+                  child: const Center(
+                      child: Text(
+                    'Sheet content',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 24,
+                    ),
+                  )),
                 ),
               ),
             ],
