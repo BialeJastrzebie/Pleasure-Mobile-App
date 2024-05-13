@@ -17,10 +17,13 @@ class _DragFilterState extends State<DragFilter> {
       initialChildSize: 0.1, // Initial height of the sheet
       minChildSize: 0.1, // Minimum height of the sheet when collapsed
       maxChildSize: 1, // Maximum height of the sheet when expanded
+      shouldCloseOnMinExtent: true,
+      snap: true,
+      snapSizes: const [0.1, 1],
       builder: (BuildContext context, ScrollController scrollController) {
         return Container(
           decoration: const BoxDecoration(
-            color: Colors.transparent,
+            color: backgroundColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40),
               topRight: Radius.circular(40),
@@ -30,7 +33,7 @@ class _DragFilterState extends State<DragFilter> {
             controller: scrollController,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(bottom: 0.5),
+                padding: const EdgeInsets.only(bottom: 0.5, top: 5),
                 child: Center(
                   child: InnerShadow(
                     blur: 2,
@@ -51,21 +54,21 @@ class _DragFilterState extends State<DragFilter> {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.all(5),
+                padding: EdgeInsets.only(left: 30, right: 30, top: 5, bottom: 1),
                 child: SearchInputBox(),
               ),
-
               // The content in the sheet
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.8,
-                  color: backgroundColor,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  color: Colors.transparent,
                   child: const Center(
                       child: Text(
                     'Sheet content',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 24,
                     ),
                   )),
