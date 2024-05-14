@@ -29,13 +29,14 @@ class MapPageState extends State<MapPage> {
                     padding: const EdgeInsets.only(bottom: 10.0),
                     initialCameraPosition: const CameraPosition(
                       target: currentLocation,
-                      zoom: 14,
+                      zoom: 15,
                     ),
                     onMapCreated: (controller) {
                       mapController = controller;
                       addMarker('test', currentLocation);
                     },
                     markers: _markers.values.toSet(),
+                    myLocationEnabled: true,
                   ),
                 ),
               ],

@@ -41,7 +41,7 @@ class _BaseViewState extends State<BaseView> {
       animationDuration: const Duration(milliseconds: 300),
       animateChildDecoration: true,
       rtlOpening: false,
-      disabledGestures: false,
+      disabledGestures: true,
       childDecoration: const BoxDecoration(boxShadow: [
         BoxShadow(
           color: Colors.black12,

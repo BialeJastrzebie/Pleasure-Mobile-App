@@ -23,7 +23,7 @@ class Button extends StatelessWidget {
             child: InnerShadow(
               blur: 1.5,
               color: Colors.black,
-              offset: const Offset(0, 2),
+              offset: const Offset(0, 3),
               child: Center(
                 child: Text(
                   text,
