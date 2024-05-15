@@ -1,6 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:pleasure_mobile_app/app/screens/map/widgets/search_drag.dart';
+import 'package:pleasure_mobile_app/app/screens/map/widgets/drag_filter.dart';
 import '/app/shared/utils/base_view.dart';
 
 class MapPage extends StatefulWidget {
@@ -12,8 +13,9 @@ class MapPage extends StatefulWidget {
 
 class MapPageState extends State<MapPage> {
   static const LatLng currentLocation = LatLng(51.7478755, 19.4519941);
-  late GoogleMapController mapController;
+  Completer<GoogleMapController> mapController = Completer();
   final Map<String, Marker> _markers = {};
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class MapPageState extends State<MapPage> {
                       zoom: 15,
                     ),
                     onMapCreated: (controller) {
-                      mapController = controller;
+                      mapController.complete(controller);
                       addMarker('test', currentLocation);
                     },
                     markers: _markers.values.toSet(),
