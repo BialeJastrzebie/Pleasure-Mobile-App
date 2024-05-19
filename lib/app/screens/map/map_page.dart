@@ -28,7 +28,7 @@ class MapPageState extends State<MapPage> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.8,
                   child: GoogleMap(
-                    padding: const EdgeInsets.only(bottom: 10.0),
+                    padding: const EdgeInsets.only(bottom: 00.0),
                     initialCameraPosition: const CameraPosition(
                       target: currentLocation,
                       zoom: 15,

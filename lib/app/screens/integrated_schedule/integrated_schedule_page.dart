@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '/app/shared/utils/base_view.dart';
 
 class IntegratedSchedulePage extends StatefulWidget {
-  const IntegratedSchedulePage({Key? key}) : super(key: key);
+  const IntegratedSchedulePage({super.key});
 
   @override
   IntegratedSchedulePageState createState() => IntegratedSchedulePageState();

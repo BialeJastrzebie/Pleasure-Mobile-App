@@ -13,8 +13,8 @@ class _SearchInputBoxState extends State<SearchInputBox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 300,  // Set the width of the SearchBar
-      height: 45,  // Set the height of the SearchBar
+      width: 280,  // Set the width of the SearchBar
+      height: 35,  // Set the height of the SearchBar
       child: SearchBar(
         backgroundColor: MaterialStateProperty.all(buttonColorMenu),
         shadowColor: MaterialStateProperty.all(Colors.black),
@@ -28,7 +28,7 @@ class _SearchInputBoxState extends State<SearchInputBox> {
           offset: const Offset(0, 0),
           child: const Icon(
             Icons.search,
-            size: 40.0,
+            size: 38.0,
             color: secondaryColor,
           ),
         ),
