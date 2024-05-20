@@ -1,6 +1,4 @@
-import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets/popular_info.dart';
@@ -11,13 +9,17 @@ import 'checkbox.dart';
 import 'heading.dart';
 
 class DragFilter extends StatefulWidget {
-  const DragFilter({super.key});
+  final Set<String> activeFilters;
+  const DragFilter({super.key, required this.activeFilters});
 
   @override
   State<DragFilter> createState() => _DragFilterState();
 }
 
 class _DragFilterState extends State<DragFilter> {
+  get activeFilters => widget.activeFilters;
+
+
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
@@ -92,7 +94,70 @@ class _DragFilterState extends State<DragFilter> {
                   const PopularInfo(text: 'Indeks'),
                   const PopularInfo(text: 'Klub Tago'),
                   const HeadingText(text: 'FILTRY:'),
-                  const CheckboxFilter(text: 'Klub'),
+                  CheckboxFilter(
+                    filter: Filter(id: 'favourite', name: 'Ulubione'),
+                    onChanged: (bool value) {
+                      setState(() {
+                        if (value) {
+                          activeFilters.add('favourite');
+                          print(activeFilters);
+                        } else {
+                          activeFilters.remove('favourite');
+                        }
+                      });
+                    },
+                  ),
+                  CheckboxFilter(
+                    filter: Filter(id: 'restaurants', name: 'Restauracje'),
+                    onChanged: (bool value) {
+                      setState(() {
+                        if (value) {
+                          activeFilters.add('restaurants');
+                          print(activeFilters);
+                        } else {
+                          activeFilters.remove('restaurants');
+                        }
+                      });
+                    },
+                  ),
+                  CheckboxFilter(
+                    filter: Filter(id: 'theatre', name: 'Teatry'),
+                    onChanged: (bool value) {
+                      setState(() {
+                        if (value) {
+                          activeFilters.add('theatre');
+                          print(activeFilters);
+                        } else {
+                          activeFilters.remove('theatre');
+                        }
+                      });
+                    },
+                  ),
+                  CheckboxFilter(
+                    filter: Filter(id: 'pubs', name: 'Puby'),
+                    onChanged: (bool value) {
+                      setState(() {
+                        if (value) {
+                          activeFilters.add('pubs');
+                          print(activeFilters);
+                        } else {
+                          activeFilters.remove('pubs');
+                        }
+                      });
+                    },
+                  ),
+                  CheckboxFilter(
+                    filter: Filter(id: 'clubs', name: 'Kluby'),
+                    onChanged: (bool value) {
+                      setState(() {
+                        if (value) {
+                          activeFilters.add('clubs');
+                        } else {
+                          activeFilters.remove('clubs');
+                        }
+                      });
+                    },
+                  ),
                 ],
               ),
             ),
