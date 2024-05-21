@@ -4,7 +4,7 @@ import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/coupo
 import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/coupon_info.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/location_description.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/location_image.dart';
-import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/opinion_button.dart';
+import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/url_page_button.dart';
 import 'package:pleasure_mobile_app/app/shared/utils/base_view.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import '../../shared/themes/theme.dart';
@@ -76,8 +76,8 @@ class MarkerDetailsPage extends StatelessWidget {
               Padding(padding: EdgeInsets.only(left: 15)),
               CouponButton(),
         ]),
-        const Padding(padding: EdgeInsets.only(top: 15)),
-        const OpinionButton(link: 'https://www.google.com'),
+        const Padding(padding: EdgeInsets.only(top: 25)),
+        const URLPageButton(link: 'https://www.google.com/search?q=zahir+kebab%2C+radwa%C5%84ska+32%2C+90-541+%C5%82%C3%B3d%C5%BA&sca_esv=e29bad09a751d822&sca_upv=1&hl=pl&gl=PL&sxsrf=ADLYWIKiu9i2xYYW7qoN_i9LGT_Q24EG_w%3A1716324967905&ei=ZwpNZsf0NvqiwPAP4qebuAo&udm=&oq=&gs_lp=Egxnd3Mtd2l6LXNlcnAiACoCCAAyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyEBAAGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQEyEBAuGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQEyEBAuGAMYtAIY6gIYjwHYAQEyEBAuGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQFImKoKUIYHWOm9AXADeACQAQCYAXOgAboBqgEDMS4xuAEByAEA-AEC-AEBmAIEoAKcAagCFMICChAAGLADGNYEGEfCAgcQIxiwAxgnwgIIEAAYgAQYogSYAxqIBgGQBgm6BgYIARABGAqSBwMzLjGgB5MJ&sclient=gws-wiz-serp'),
       ],
     ));
   }

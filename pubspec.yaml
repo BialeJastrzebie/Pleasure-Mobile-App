@@ -42,6 +42,7 @@ dependencies:
   geolocator: ^9.0.2
   flutter_dotenv: ^5.1.0
   flutter_inner_shadow: 0.0.1
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:
@@ -118,12 +119,6 @@ flutter:
     - android/gradle/
     - android/gradle/wrapper/
     - android/.gradle/
-    - android/.gradle/7.6.3/
-    - android/.gradle/7.6.3/checksums/
-    - android/.gradle/7.6.3/fileHashes/
-    - android/.gradle/7.6.3/fileChanges/
-    - android/.gradle/7.6.3/vcsMetadata/
-    - android/.gradle/7.6.3/dependencies-accessors/
     - android/.gradle/vcs-1/
     - android/.gradle/buildOutputCleanup/
     - android/app/build.gradle

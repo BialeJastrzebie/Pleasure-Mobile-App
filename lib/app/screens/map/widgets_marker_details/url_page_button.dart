@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
-import '/app/shared/themes/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class OpinionButton extends StatelessWidget {
+class URLPageButton extends StatelessWidget {
   final String link;
-  const OpinionButton({super.key, required this.link});
+  const URLPageButton({super.key, required this.link});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.7,
+      width: MediaQuery.of(context).size.width * 0.75,
       height: MediaQuery.of(context).size.height * 0.06,
       child: FloatingActionButton(
           backgroundColor: Colors.blue[800],
-          onPressed: () {
-
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(link))) {
+              await launchUrl(Uri.parse(link));
+            } else {
+              throw 'Could not launch $link';
+            }
           },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(60.0),
@@ -26,9 +30,9 @@ class OpinionButton extends StatelessWidget {
             offset: Offset(0, 2),
             child: Center(
               child: Text(
-                'OPINIE',
+                'ODWIEDŹ STRONĘ',
                 style: TextStyle(
-                  fontSize: 32,
+                  fontSize: 28,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                   shadows: [
