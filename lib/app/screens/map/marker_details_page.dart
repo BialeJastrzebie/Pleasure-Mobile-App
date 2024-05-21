@@ -9,9 +9,47 @@ class MarkerDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView(
-      body: Center(
-        child: Text('Details for marker: $markerId'),
-      ),
-    );
+        body: Column(
+      children: [
+        Row(
+          children: [
+            const Padding(padding: EdgeInsets.only(left: 10)),
+            Image(
+                image: AssetImage('images/kebab.png'),
+                width: MediaQuery.of(context).size.width * 0.3,
+                height: MediaQuery.of(context).size.height * 0.3
+            ),
+            const Padding(padding: EdgeInsets.only(left: 30)),
+            const Column(
+              children: [
+                Padding(padding: EdgeInsets.only(top: 15)),
+                Text(
+                  'Zahir Kebab',
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.black,
+                  ),
+                ),
+                Padding(padding: EdgeInsets.only(top: 15)),
+
+              ],
+            ),
+          ],
+        ),
+        const Center(
+          widthFactor: 3.0,
+          heightFactor: 1.0,
+          child: Text(
+            'Bardzo fajna restauracja w bardzo fajnym miejscu XD',
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
+            ),
+          ),
+        )
+      ],
+    ));
   }
 }
