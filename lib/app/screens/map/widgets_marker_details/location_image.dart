@@ -11,11 +11,11 @@ class LocationImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.3,
+      width: MediaQuery.of(context).size.width * 0.34,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
         color: buttonColorMenu,
-        borderRadius: BorderRadius.circular(28),
+        borderRadius: BorderRadius.circular(25),
         boxShadow: const [
           BoxShadow(
             offset: Offset(0, 2),

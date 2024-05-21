@@ -24,7 +24,7 @@ class MarkerDetailsPage extends StatelessWidget {
           children: [
             const Padding(padding: EdgeInsets.only(left: 10)),
             const LocationImage(path: 'images/kebab.png'),
-            const Padding(padding: EdgeInsets.only(left: 30)),
+            const Spacer(),
             Column(
               children: [
                 const Padding(padding: EdgeInsets.only(top: 15)),
@@ -64,6 +64,7 @@ class MarkerDetailsPage extends StatelessWidget {
                 const AddressText(address: 'Radwańska 52'),
               ],
             ),
+            const Padding(padding: EdgeInsets.only(right: 10)),
           ],
         ),
         const DescriptionText(
