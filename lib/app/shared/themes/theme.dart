@@ -11,3 +11,4 @@ const Color buttonColor = Color.fromRGBO(165, 60, 55, 1.0);
 const Color buttonColorMenu = Color.fromRGBO(255, 254, 254, 1.0);
 const Color buttonColorMenuText = Color.fromRGBO(230, 22, 13, 1.0);
 const Color darkerWhiteTextColor = Color.fromRGBO(213, 213, 213, 1.0);
+const Color darkerWhiteTextColorLocation = Color.fromRGBO(183, 171, 171, 1.0);

@@ -14,7 +14,7 @@ class HeadingText extends StatelessWidget {
       child: InnerShadow(
         blur: 0.5,
         color: Colors.black87,
-        offset: Offset(0, 2),
+        offset: const Offset(0, 2),
         child: Text(
           text,
           style: const TextStyle(
