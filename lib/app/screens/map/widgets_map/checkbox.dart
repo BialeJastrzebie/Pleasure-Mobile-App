@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pleasure_mobile_app/app/shared/themes/theme.dart';
+import 'package:provider/provider.dart';
+
+import '../filter_state.dart';
 
 class Filter {
   final String id;
@@ -10,9 +13,8 @@ class Filter {
 
 class CheckboxFilter extends StatefulWidget {
   final Filter filter;
-  final ValueChanged<bool> onChanged;
 
-  const CheckboxFilter({super.key, required this.filter, required this.onChanged});
+  const CheckboxFilter({super.key, required this.filter});
 
   @override
   State<CheckboxFilter> createState() => _CheckboxFilterState();
@@ -23,6 +25,9 @@ class _CheckboxFilterState extends State<CheckboxFilter> {
 
   @override
   Widget build(BuildContext context) {
+    final filterState = Provider.of<FilterState>(context);
+    isChecked = filterState.activeFilters.contains(widget.filter.id);
+
     return Row(
       children: [
         const Padding(padding: EdgeInsets.only(left: 10)),
@@ -31,8 +36,13 @@ class _CheckboxFilterState extends State<CheckboxFilter> {
             onTap: () {
               setState(() {
                 isChecked = !isChecked;
+                if (isChecked) {
+                  filterState.addFilter(widget.filter.id);
+                } else {
+                  filterState.removeFilter(widget.filter.id);
+                }
+                print(filterState.activeFilters);
               });
-              widget.onChanged(isChecked);
             },
             child: Container(
               width: 55,

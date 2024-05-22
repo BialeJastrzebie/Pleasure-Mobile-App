@@ -3,7 +3,7 @@ import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import '/app/shared/themes/theme.dart';
 
 class CouponButton extends StatefulWidget {
-  const CouponButton({Key? key}) : super(key: key);
+  const CouponButton({super.key});
 
   @override
   _CouponButtonState createState() => _CouponButtonState();
