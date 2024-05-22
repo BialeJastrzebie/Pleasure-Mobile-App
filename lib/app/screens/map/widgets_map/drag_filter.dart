@@ -3,9 +3,7 @@ import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets_map/popular_info.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets_map/search_input_box.dart';
 import 'package:pleasure_mobile_app/app/shared/themes/theme.dart';
-import 'package:provider/provider.dart';
 
-import '../filter_state.dart';
 import 'checkbox.dart';
 import 'heading.dart';
 
@@ -23,9 +21,7 @@ class _DragFilterState extends State<DragFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => FilterState(),
-      child: DraggableScrollableSheet(
+    return DraggableScrollableSheet(
         initialChildSize: 0.12,
         // Initial height of the sheet
         minChildSize: 0.12,
@@ -118,7 +114,6 @@ class _DragFilterState extends State<DragFilter> {
             ),
           );
         },
-      ),
     );
   }
 }

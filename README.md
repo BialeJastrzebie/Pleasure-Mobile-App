@@ -11,3 +11,8 @@
 - **Integrated Friend Plans:** By adding friends within the app, users can create and share integrated plans, facilitating coordination and socialization.
 
 #### Stay tuned for updates and enhancements as we continue to develop Pleasure to cater to the needs and interests of students everywhere!
+
+
+## Getting Started
+Useful websites:
+- [Icons](https://www.flaticon.com/)
