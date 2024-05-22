@@ -20,6 +20,7 @@ class MapPage extends StatefulWidget {
 class MapPageState extends State<MapPage> {
   static const LatLng tmpLocation = LatLng(51.7478755, 19.4519941);
   Completer<GoogleMapController> mapController = Completer();
+
   get activeFilters => Provider.of<FilterState>(context).activeFilters;
 
   /////////////////////////////////////////////////////////////////////////////
@@ -41,6 +42,7 @@ class MapPageState extends State<MapPage> {
     final Uint8List imageData = await getBytesFromAsset(path, width);
     return BitmapDescriptor.fromBytes(imageData);
   }
+
   ///////////////////////////////////////////////////////////////////////////
 
   Set<Marker> getMarkers() {
@@ -59,37 +61,38 @@ class MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return BaseView(
       body: Scaffold(
-          body: Stack(
-        children: <Widget>[
-          Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.8,
-                child: GoogleMap(
-                  padding: const EdgeInsets.only(bottom: 0.0),
-                  initialCameraPosition: const CameraPosition(
-                    target: tmpLocation,
-                    zoom: 15,
+        body: Stack(
+          children: <Widget>[
+            Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  child: GoogleMap(
+                    padding: const EdgeInsets.only(bottom: 0.0),
+                    initialCameraPosition: const CameraPosition(
+                      target: tmpLocation,
+                      zoom: 15,
+                    ),
+                    onMapCreated: (controller) async {
+                      mapController.complete(controller);
+                      addMarker(
+                        'Zahir Kebab',
+                        tmpLocation,
+                        'restaurants',
+                        await getBitmapDescriptorFromAssetBytes(
+                            "images/kebab.png", 100),
+                      );
+                    },
+                    markers: getMarkers(),
+                    myLocationEnabled: true,
                   ),
-                  onMapCreated: (controller) async {
-                    mapController.complete(controller);
-                    addMarker(
-                      'Zahir Kebab',
-                      tmpLocation,
-                      'restaurants',
-                      await getBitmapDescriptorFromAssetBytes(
-                          "images/kebab.png", 100),
-                    );
-                  },
-                  markers: getMarkers(),
-                  myLocationEnabled: true,
                 ),
-              ),
-            ],
-          ),
-          DragFilter(activeFilters: activeFilters),
-        ],
-      )),
+              ],
+            ),
+            DragFilter(activeFilters: activeFilters),
+          ],
+        ),
+      ),
     );
   }
 
