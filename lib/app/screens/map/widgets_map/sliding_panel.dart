@@ -6,7 +6,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../../shared/themes/theme.dart';
 import 'checkbox.dart';
 import 'draggable_divider.dart';
-import 'heading.dart';
+import 'heading_text.dart';
 
 class SlidingPanel extends StatefulWidget {
   const SlidingPanel({super.key});
