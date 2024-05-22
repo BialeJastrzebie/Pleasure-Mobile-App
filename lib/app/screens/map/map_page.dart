@@ -21,6 +21,8 @@ class MapPageState extends State<MapPage> {
   static const LatLng tmpLocation = LatLng(51.7478755, 19.4519941);
   Completer<GoogleMapController> mapController = Completer();
 
+  Future<GoogleMapController> get mapControllerFuture => mapController.future;
+
   get activeFilters => Provider.of<FilterState>(context).activeFilters;
 
   /////////////////////////////////////////////////////////////////////////////
@@ -90,7 +92,7 @@ class MapPageState extends State<MapPage> {
               ],
             ),
             // DragFilter(activeFilters: activeFilters),
-            const SlidingPanel(),
+            SlidingPanel(mapControllerFuture: mapControllerFuture),
           ],
         ),
       ),
