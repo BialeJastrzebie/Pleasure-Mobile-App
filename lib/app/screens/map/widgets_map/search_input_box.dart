@@ -13,8 +13,8 @@ class _SearchInputBoxState extends State<SearchInputBox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 280,  // Set the width of the SearchBar
-      height: 35,  // Set the height of the SearchBar
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: MediaQuery.of(context).size.height * 0.05,
       child: SearchBar(
         backgroundColor: MaterialStateProperty.all(buttonColorMenu),
         shadowColor: MaterialStateProperty.all(Colors.black),
