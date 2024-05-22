@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pleasure_mobile_app/app/shared/themes/theme.dart';
 
 class DescriptionText extends StatelessWidget {
   final String description;
@@ -11,7 +10,7 @@ class DescriptionText extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 25),
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
           height: MediaQuery.of(context).size.height * 0.45,
           child: Text(

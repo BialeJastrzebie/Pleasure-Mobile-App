@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:pleasure_mobile_app/app/screens/map/widgets_map/drag_filter.dart';
+import 'package:pleasure_mobile_app/app/screens/map/widgets_map/sliding_panel.dart';
 import 'package:provider/provider.dart';
 import '../../shared/utils/change_screen_animation.dart';
 import '/app/shared/utils/base_view.dart';
@@ -89,7 +89,8 @@ class MapPageState extends State<MapPage> {
                 ),
               ],
             ),
-            DragFilter(activeFilters: activeFilters),
+            // DragFilter(activeFilters: activeFilters),
+            const SlidingPanel(),
           ],
         ),
       ),
