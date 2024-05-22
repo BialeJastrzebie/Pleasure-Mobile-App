@@ -16,3 +16,4 @@
 ## Getting Started
 Useful websites:
 - [Icons](https://www.flaticon.com/)
+- [Schedule of work](https://github.com/users/Juhasen/projects/3/views/1)
