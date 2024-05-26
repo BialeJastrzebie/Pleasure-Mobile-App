@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pleasure_mobile_app/app/screens/integrated_schedule/integrated_schedule_page.dart';
-import 'package:pleasure_mobile_app/app/shared/utils/base_view.dart';
+import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
 import 'package:pleasure_mobile_app/app/screens/home/widgets/button.dart';
 
 import '../../shared/utils/change_screen_animation.dart';

@@ -5,7 +5,7 @@ import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/coupo
 import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/location_description.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/location_image.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/url_page_button.dart';
-import 'package:pleasure_mobile_app/app/shared/utils/base_view.dart';
+import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import '../../shared/themes/theme.dart';
 

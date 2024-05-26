@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/app/shared/utils/base_view.dart';
+import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
 
 class IntegratedSchedulePage extends StatefulWidget {
   const IntegratedSchedulePage({super.key});

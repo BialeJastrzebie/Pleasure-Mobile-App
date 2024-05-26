@@ -6,7 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets_map/sliding_panel.dart';
 import 'package:provider/provider.dart';
 import '../../shared/utils/change_screen_animation.dart';
-import '/app/shared/utils/base_view.dart';
+import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
 import 'filter_state.dart';
 import 'marker_details_page.dart';
 
