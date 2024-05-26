@@ -7,6 +7,7 @@ import 'package:pleasure_mobile_app/app/screens/map/widgets_map/sliding_panel.da
 import 'package:provider/provider.dart';
 import '../../shared/utils/change_screen_animation.dart';
 import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
+import '../../shared/utils/data_fetch.dart';
 import 'filter_state.dart';
 import 'marker_details_page.dart';
 

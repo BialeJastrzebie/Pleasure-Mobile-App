@@ -6,6 +6,7 @@ import 'package:pleasure_mobile_app/app/screens/home/widgets/button.dart';
 import '../../shared/utils/change_screen_animation.dart';
 import '../friends/friends_page.dart';
 import '../map/map_page.dart';
+import '../map/marker_details_page.dart';
 import '../schedule/schedule_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
               const Spacer(),
               Button(
                   text: "MAPA",
-                  onPressed: () {
+                  onPressed: () async {
                     animateScreenChange(
                         context, const MapPage(), Curves.fastLinearToSlowEaseIn);
                   }),

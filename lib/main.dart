@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app/screens/home/home_page.dart';
+import 'app/screens/login/login_page.dart';
 import 'app/screens/map/filter_state.dart';
 import 'app/screens/map/map_page.dart';
 import 'app/screens/integrated_schedule/integrated_schedule_page.dart';
@@ -33,8 +34,10 @@ class MyApp extends StatelessWidget {
           ),
         ),
 
-        initialRoute: '/home', // This is the route that the app opens first.
+        initialRoute: '/login', // This is the route that the app opens first.
         routes: {
+          '/login': (context) => const LoginPage(),
+          // Login route
           '/home': (context) => const HomePage(),
           // Home route
           '/map': (context) => const MapPage(),

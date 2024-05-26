@@ -8,6 +8,7 @@ import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/url_p
 import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import '../../shared/themes/theme.dart';
+import '../../shared/utils/data_fetch.dart';
 
 class MarkerDetailsPage extends StatelessWidget {
   final String markerId;
@@ -82,4 +83,22 @@ class MarkerDetailsPage extends StatelessWidget {
       ],
     ));
   }
+}
+
+Future<Map<String, dynamic>> getLocationDetails(String url) async {
+  var data = await fetchData(url);
+  if (data is List && data.isNotEmpty) {
+    var location = data.first;
+    if (location is Map) {
+      return {
+        'name': location['name'],
+        'coupon': location['coupon'],
+        'latitude': location['latitude'],
+        'longitude': location['longitude'],
+        'address': location['address'],
+        'description': location['description'],
+      };
+    }
+  }
+  throw Exception('Failed to get location details');
 }
