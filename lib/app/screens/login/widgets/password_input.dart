@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../shared/themes/theme.dart';
 
 class PasswordInput extends StatefulWidget {
-  const PasswordInput({super.key});
+  final TextEditingController controller;
+
+  const PasswordInput({super.key, required this.controller});
 
   @override
   State<PasswordInput> createState() => _PasswordInputState();
@@ -30,7 +32,7 @@ class _PasswordInputState extends State<PasswordInput> {
         padding: const EdgeInsets.only(left: 20.0),
         child: TextFormField(
           obscureText: true,
-          controller: _passwordController,
+          controller: widget.controller,
           style: const TextStyle(
             fontSize: 20,
             color: Colors.black,

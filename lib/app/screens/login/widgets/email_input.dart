@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import '../../../shared/themes/theme.dart';
 
 class EmailInput extends StatefulWidget {
-  const EmailInput({super.key});
+  final TextEditingController controller;
+
+  const EmailInput({super.key, required this.controller});
 
   @override
   State<EmailInput> createState() => _EmailInputState();
 }
 
 class _EmailInputState extends State<EmailInput> {
-  final _usernameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +31,7 @@ class _EmailInputState extends State<EmailInput> {
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0),
         child: TextFormField(
-          controller: _usernameController,
+          controller: widget.controller,
           style: const TextStyle(
             fontSize: 20,
             color: Colors.black,

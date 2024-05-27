@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:pleasure_mobile_app/app/screens/login/widgets/email_input.dart';
@@ -45,9 +46,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 150)),
-                const EmailInput(),
+                EmailInput(controller: _usernameController),
                 const Padding(padding: EdgeInsets.only(top: 20)),
-                const PasswordInput(),
+                PasswordInput(controller: _passwordController),
                 const Padding(padding: EdgeInsets.only(top: 40)),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -61,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                       // If the form is valid, display a Snackbar and authenticate the user.
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
+                          duration: Duration(seconds: 1),
                           content: Center(
                             child: Text(
                                 style: TextStyle(
@@ -72,8 +74,42 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       );
-                      authenticate(
-                          _usernameController.text, _passwordController.text);
+                      authenticate(_usernameController.text,
+                              _passwordController.text)
+                          .then((value) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            duration: Duration(seconds: 3),
+                            content: Center(
+                              child: Text(
+                                'Zalogowano pomyślnie',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                  color: backgroundColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                        Navigator.pushNamed(context, '/home');
+                      }).catchError((error) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            duration: Duration(seconds: 3),
+                            content: Center(
+                              child: Text(
+                                'Nie udało się zalogować',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                  color: backgroundColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      });
                     }
                   },
                   child: const Text(
@@ -103,15 +139,15 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 Future<String> authenticate(String username, String password) async {
+  Map<String, String> data = {'email': username, 'password': password};
+  String jsonString = jsonEncode(data);
+
   final response = await http.post(
-    Uri.parse('http://10.0.2.2:5432/api/user/token/'),
+    Uri.parse('http://localhost:8000/api/user/token/'),
     headers: <String, String>{
-      'Content-Type': 'text/plain; charset=UTF-8',
+      'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: jsonEncode(<String, String>{
-      'email': username,
-      'password': password,
-    }),
+    body: jsonString,
   );
 
   if (response.statusCode == 200) {
