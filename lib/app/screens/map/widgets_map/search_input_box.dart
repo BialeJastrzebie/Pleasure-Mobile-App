@@ -5,8 +5,8 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '/app/shared/themes/theme.dart';
 
 class SearchInputBox extends StatefulWidget {
-  final VoidCallback onTap;
-  final Future<GoogleMapController> mapControllerFuture;
+  VoidCallback onTap;
+  Future<GoogleMapController> mapControllerFuture;
   PanelController panelController = PanelController();
   SearchInputBox({super.key, required this.onTap, required this.mapControllerFuture, required this.panelController});
 
@@ -16,7 +16,6 @@ class SearchInputBox extends StatefulWidget {
 
 
 class _SearchInputBoxState extends State<SearchInputBox> {
-  final PanelController _panelController = PanelController();
   final List<String> _options = [
     'Zahir Kebab',
     'Indeks',
