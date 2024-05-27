@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:pleasure_mobile_app/app/screens/login/widgets/email_input.dart';
+import 'package:pleasure_mobile_app/app/screens/login/widgets/password_input.dart';
+import 'package:pleasure_mobile_app/app/shared/themes/theme.dart';
 import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,49 +24,66 @@ class _LoginPageState extends State<LoginPage> {
     return BaseView(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(20.0),
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                TextFormField(
-                  controller: _usernameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Username',
+                const Text(
+                  'PŁeasure',
+                  style: TextStyle(
+                    fontSize: 64,
+                    fontWeight: FontWeight.w400,
+                    shadows: [
+                      Shadow(
+                        color: Colors.black,
+                        blurRadius: 10,
+                        offset: Offset(0, 7),
+                      ),
+                    ],
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your username';
-                    }
-                    return null;
-                  },
                 ),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                  ),
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
-                ),
+                const Padding(padding: EdgeInsets.only(top: 150)),
+                const EmailInput(),
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                const PasswordInput(),
+                const Padding(padding: EdgeInsets.only(top: 40)),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: buttonColor,
+                    shadowColor: Colors.black,
+                    elevation: 10,
+                    minimumSize: const Size(250, 60),
+                  ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // If the form is valid, display a Snackbar and authenticate the user.
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
+                        const SnackBar(
+                          content: Center(
+                            child: Text(
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.black87,
+                                ),
+                                'Trwa logowanie...'),
+                          ),
+                        ),
                       );
                       authenticate(
                           _usernameController.text, _passwordController.text);
                     }
                   },
-                  child: const Text('Submit'),
+                  child: const Text(
+                    'Zaloguj się',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ],
             ),
