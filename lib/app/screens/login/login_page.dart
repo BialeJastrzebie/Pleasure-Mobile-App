@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:pleasure_mobile_app/app/screens/login/widgets/email_input.dart';
@@ -176,11 +175,13 @@ Future<dynamic> fetchData(String url) async {
     Uri.parse(url),
     headers: <String, String>{
       'Authorization': 'Token $token',
+      'Content-Type': 'application/json; charset=UTF-8',
     },
   );
 
   if (response.statusCode == 200) {
-    return jsonDecode(response.body);
+    String responseBody = utf8.decode(response.bodyBytes);
+    return jsonDecode(responseBody);
   } else {
     throw Exception('Failed to load data');
   }

@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => FilterState(),
       child: MaterialApp(
+        locale: const Locale('pl', 'PL'),
         title: 'PLeasure',
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: backgroundColor,

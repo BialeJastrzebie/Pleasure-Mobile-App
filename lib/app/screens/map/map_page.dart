@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:pleasure_mobile_app/app/screens/login/login_page.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets_map/sliding_panel.dart';
 import 'package:provider/provider.dart';
 import '../../shared/utils/change_screen_animation.dart';
@@ -77,13 +78,12 @@ class MapPageState extends State<MapPage> {
                     ),
                     onMapCreated: (controller) async {
                       mapController.complete(controller);
-                      addMarker(
-                        'Zahir Kebab',
-                        tmpLocation,
-                        'restaurants',
-                        await getBitmapDescriptorFromAssetBytes(
-                            "images/kebab.png", 100),
-                      );
+                      fetchData('http://localhost:8000/api/map/locations/')
+                          .then((value) {
+                        value.forEach((element) {
+                          addMarker(element);
+                        });
+                      });
                     },
                     markers: getMarkers(),
                     myLocationEnabled: true,
@@ -99,24 +99,61 @@ class MapPageState extends State<MapPage> {
     );
   }
 
-  void addMarker(String markerId, LatLng location, String category,
-      BitmapDescriptor customIcon) {
+  Future<void> addMarker(Map<String, dynamic> element) async {
+    String markerID = element['name'];
+    LatLng location = LatLng(
+        double.parse(element['latitude']), double.parse(element['longitude']));
+    String category = element['category'];
+    String pathToImage = element['image'];
+    // print(markerID);
+    // print(location);
+    // print(category);
+    // print(pathToImage);
+    BitmapDescriptor markerIcon = await chooseIcon(category);
     var marker = Marker(
-      markerId: MarkerId(markerId),
+      markerId: MarkerId(markerID),
       position: location,
-      icon: customIcon,
+      icon: markerIcon,
       infoWindow: InfoWindow(
-        title: markerId,
+        title: markerID,
         snippet: category,
       ),
       onTap: () {
-        animateScreenChange(context, MarkerDetailsPage(markerId: markerId),
+        animateScreenChange(
+            context,
+            MarkerDetailsPage(
+              markerId: markerID,
+              image: pathToImage,
+              description: element['description'],
+              address: element['address'],
+              couponInfo: element['coupon'],
+              urlPageButton: element['url'],
+            ),
             Curves.fastLinearToSlowEaseIn);
       },
     );
 
     setState(() {
-      _allMarkers[markerId] = marker;
+      _allMarkers[markerID] = marker;
     });
+  }
+
+  Future<BitmapDescriptor> chooseIcon(String category) async {
+    BitmapDescriptor customIcon;
+
+    if (category == 'Kebab') {
+      customIcon =
+          await getBitmapDescriptorFromAssetBytes('images/kebab.png', 100);
+    } else if (category == 'Sklep spożywczy') {
+      customIcon =
+          await getBitmapDescriptorFromAssetBytes('images/shop.png', 100);
+    } else if (category == 'Klub') {
+      customIcon =
+          await getBitmapDescriptorFromAssetBytes('images/club.png', 100);
+    } else {
+      customIcon = BitmapDescriptor.defaultMarker;
+    }
+
+    return customIcon;
   }
 }

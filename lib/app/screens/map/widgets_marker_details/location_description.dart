@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class DescriptionText extends StatelessWidget {
@@ -12,8 +13,8 @@ class DescriptionText extends StatelessWidget {
         padding: const EdgeInsets.only(top: 25),
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
-          height: MediaQuery.of(context).size.height * 0.4,
-          child: Text(
+          height: MediaQuery.of(context).size.height * 0.45,
+          child: AutoSizeText(
             description,
             style: const TextStyle(
               fontSize: 22,
@@ -28,6 +29,7 @@ class DescriptionText extends StatelessWidget {
               ],
             ),
             textAlign: TextAlign.center,
+            maxLines: 15,
           ),
         ),
       ),

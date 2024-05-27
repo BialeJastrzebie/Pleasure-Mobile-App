@@ -9,12 +9,23 @@ import 'package:pleasure_mobile_app/app/screens/map/widgets_marker_details/url_p
 import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import '../../shared/themes/theme.dart';
-import '../../shared/utils/data_fetch.dart';
 
 class MarkerDetailsPage extends StatelessWidget {
   final String markerId;
+  final String image;
+  final String description;
+  final String address;
+  final String couponInfo;
+  final String urlPageButton;
 
-  const MarkerDetailsPage({super.key, required this.markerId});
+  const MarkerDetailsPage(
+      {super.key,
+      required this.markerId,
+      required this.image,
+      required this.description,
+      required this.address,
+      required this.couponInfo,
+      required this.urlPageButton});
 
   @override
   Widget build(BuildContext context) {
@@ -24,35 +35,36 @@ class MarkerDetailsPage extends StatelessWidget {
         Row(
           children: [
             const Padding(padding: EdgeInsets.only(left: 10)),
-            const LocationImage(path: 'images/kebab.png'),
+            LocationImage(path: image),
             const Spacer(),
             Column(
               children: [
                 const Padding(padding: EdgeInsets.only(top: 15)),
-                SizedBox(//the position of like button
+                SizedBox(
+                  //the position of like button
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: const Row(children: [
                     Spacer(),
                     LikeButton(
                       size: 50,
                       circleColor:
-                      CircleColor(start: Colors.white, end: Colors.white),
+                          CircleColor(start: Colors.white, end: Colors.white),
                       bubblesColor: BubblesColor(
-                          dotPrimaryColor: Colors.black,
-                          dotSecondaryColor: secondaryColor,
+                        dotPrimaryColor: Colors.black,
+                        dotSecondaryColor: secondaryColor,
                         dotThirdColor: buttonColorMenu,
                         dotLastColor: buttonColor,
                       ),
                     ),
                   ]),
                 ),
-                const InnerShadow(
+                InnerShadow(
                   blur: 0.5,
                   color: Colors.black,
-                  offset: Offset(1, 2),
+                  offset: const Offset(1, 2),
                   child: Text(
-                    'Zahir Kebab',
-                    style: TextStyle(
+                    markerId,
+                    style: const TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.w900,
                       color: darkerWhiteTextColorLocation,
@@ -76,44 +88,22 @@ class MarkerDetailsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const AddressText(address: 'Radwańska 52'),
+                AddressText(address: address),
               ],
             ),
             const Padding(padding: EdgeInsets.only(right: 10)),
           ],
         ),
-        const DescriptionText(
-            description:
-                'Soczysty kebab, przygotowany z delikatnego, soczystego mięsa, świeżych warzyw i zawinięty w ciepły, miękki chleb. Przyprawiony mieszanką tradycyjnych przypraw, oferuje doskonałą równowagę smaków. Dlatego przygotowaliśmy dla Ciebie niesamowitą ofertę!'),
+        DescriptionText(description: description),
         const Padding(padding: EdgeInsets.only(top: 20)),
-        const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          CouponInfo(text: 'Kup 2 kebaby,\n3. za darmo!'),
-          Padding(padding: EdgeInsets.only(left: 15)),
-          CouponButton(),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          CouponInfo(text: couponInfo),
+          const Padding(padding: EdgeInsets.only(left: 15)),
+          const CouponButton(),
         ]),
         const Padding(padding: EdgeInsets.only(top: 25)),
-        const URLPageButton(
-            link:
-                'https://www.google.com/search?q=zahir+kebab%2C+radwa%C5%84ska+32%2C+90-541+%C5%82%C3%B3d%C5%BA&sca_esv=e29bad09a751d822&sca_upv=1&hl=pl&gl=PL&sxsrf=ADLYWIKiu9i2xYYW7qoN_i9LGT_Q24EG_w%3A1716324967905&ei=ZwpNZsf0NvqiwPAP4qebuAo&udm=&oq=&gs_lp=Egxnd3Mtd2l6LXNlcnAiACoCCAAyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyEBAAGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQEyEBAuGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQEyEBAuGAMYtAIY6gIYjwHYAQEyEBAuGAMYtAIY6gIYjwHYAQEyEBAAGAMYtAIY6gIYjwHYAQFImKoKUIYHWOm9AXADeACQAQCYAXOgAboBqgEDMS4xuAEByAEA-AEC-AEBmAIEoAKcAagCFMICChAAGLADGNYEGEfCAgcQIxiwAxgnwgIIEAAYgAQYogSYAxqIBgGQBgm6BgYIARABGAqSBwMzLjGgB5MJ&sclient=gws-wiz-serp'),
+        URLPageButton(link: urlPageButton),
       ],
     ));
   }
-}
-
-Future<Map<String, dynamic>> getLocationDetails(String url) async {
-  var data = await fetchData(url);
-  if (data is List && data.isNotEmpty) {
-    var location = data.first;
-    if (location is Map) {
-      return {
-        'name': location['name'],
-        'coupon': location['coupon'],
-        'latitude': location['latitude'],
-        'longitude': location['longitude'],
-        'address': location['address'],
-        'description': location['description'],
-      };
-    }
-  }
-  throw Exception('Failed to get location details');
 }
