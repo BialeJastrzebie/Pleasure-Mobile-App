@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
 
 Future<String> authenticate(String username, String password) async {
   final response = await http.post(
-    Uri.parse('http://0.0.0.0:5432/api/user/token/'),
+    Uri.parse('http://10.0.2.2:5432/api/user/token/'),
     headers: <String, String>{
       'Content-Type': 'text/plain; charset=UTF-8',
     },
@@ -107,6 +107,7 @@ Future<String> authenticate(String username, String password) async {
 Future<String> getToken() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
+  print(token);
   if (token == null) {
     throw Exception('No token found');
   }

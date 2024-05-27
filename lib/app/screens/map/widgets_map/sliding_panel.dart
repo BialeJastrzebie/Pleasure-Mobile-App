@@ -25,7 +25,7 @@ class _SlidingPanelState extends State<SlidingPanel> {
     return SlidingUpPanel(
       controller: _panelController,
       header: const DraggableDivider(),
-      minHeight: MediaQuery.of(context).size.height * 0.12,
+      minHeight: MediaQuery.of(context).size.height * 0.10,
       maxHeight: MediaQuery.of(context).size.height,
       panel: DecoratedBox(
         decoration: const BoxDecoration(
