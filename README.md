@@ -17,3 +17,25 @@
 Useful websites:
 - [Icons](https://www.flaticon.com/)
 - [Schedule of work](https://github.com/users/Juhasen/projects/3/views/1)
+
+## Steps to start debugging in physical device
+1. Connect your device to your computer using a USB cable.
+2. Enable USB debugging on your device.
+3. In the terminal, run the flutter devices command to verify that Flutter recognizes your device.
+```
+adb devices
+```
+5. Run the app with the following command:
+```
+flutter run
+```
+6. Run the django server with the following command:
+```
+python manage.py runserver 0.0.0.0:8000
+```
+7. Change the port number of the phone to 8000 in the app.
+```
+adb reverse tcp:8000 tcp:8000
+```
+8. Open the app on your device.
+9. Enjoy!
