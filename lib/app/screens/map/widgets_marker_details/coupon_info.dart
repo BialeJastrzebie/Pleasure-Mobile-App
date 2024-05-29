@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import '/app/shared/themes/theme.dart';
@@ -11,7 +12,7 @@ class CouponInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.55,
-      height: MediaQuery.of(context).size.height * 0.12,
+      height: MediaQuery.of(context).size.height * 0.1,
       decoration: BoxDecoration(
         color: buttonColorMenu,
         borderRadius: BorderRadius.circular(9.0),
@@ -28,7 +29,7 @@ class CouponInfo extends StatelessWidget {
         color: Colors.black,
         offset: const Offset(0, 3),
         child: Center(
-          child: Text(
+          child: AutoSizeText(
             text,
             style: const TextStyle(
               fontSize: 24,
@@ -36,6 +37,7 @@ class CouponInfo extends StatelessWidget {
               color: buttonColorMenuText,
             ),
             textAlign: TextAlign.center,
+            maxLines: 2,
           ),
         ),
       ),

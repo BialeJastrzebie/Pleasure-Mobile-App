@@ -41,15 +41,6 @@ class MarkerDetailsPage extends StatelessWidget {
               const Spacer(),
               Column(
                 children: [
-                  const Padding(padding: EdgeInsets.only(top: 15)),
-                  SizedBox(
-                    //the position of like button
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    child: const Row(children: [
-                      Spacer(),
-
-                    ]),
-                  ),
                   LocationName(markerId: markerId),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.5,
@@ -75,20 +66,20 @@ class MarkerDetailsPage extends StatelessWidget {
           const Padding(padding: EdgeInsets.only(left: 15)),
           const CouponButton(),
         ]),
-        const Padding(padding: EdgeInsets.only(top: 25)),
+        const Padding(padding: EdgeInsets.only(top: 15)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Padding(padding: EdgeInsets.only(left: 15)),
             URLPageButton(link: urlPageButton),
-            const Padding(padding: EdgeInsets.only(left: 15)),
+            const Padding(padding: EdgeInsets.only(left: 40)),
             const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 LikeButton(
-                  size: 80,
+                  size: 70,
                   circleColor:
-                  CircleColor(start: Colors.white, end: Colors.white),
+                      CircleColor(start: Colors.white, end: Colors.white),
                   bubblesColor: BubblesColor(
                     dotPrimaryColor: Colors.black,
                     dotSecondaryColor: secondaryColor,
@@ -98,7 +89,6 @@ class MarkerDetailsPage extends StatelessWidget {
                 ),
               ],
             ),
-
           ],
         ),
       ],

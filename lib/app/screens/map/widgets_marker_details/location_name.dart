@@ -17,23 +17,30 @@ class LocationName extends StatelessWidget {
       offset: const Offset(1, 2),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.55,
-        height: MediaQuery.of(context).size.height * 0.1,
-        child: AutoSizeText(
-          markerId,
-          style: const TextStyle(
-            fontSize: 40,
-            fontWeight: FontWeight.w900,
-            color: darkerWhiteTextColorLocation,
-            shadows: [
-              Shadow(
-                color: Colors.black12,
-                blurRadius: 6,
-                offset: Offset(0, 3),
+        height: MediaQuery.of(context).size.height * 0.14,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            AutoSizeText(
+              markerId,
+              style: const TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.w900,
+                color: darkerWhiteTextColorLocation,
+                height: 1,
+                shadows: [
+                  Shadow(
+                    color: Colors.black12,
+                    blurRadius: 6,
+                    offset: Offset(0, 3),
+                  ),
+                ],
               ),
-            ],
-          ),
-          textAlign: TextAlign.center,
-          maxLines: 2,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              softWrap: true,
+            ),
+          ],
         ),
       ),
     );
