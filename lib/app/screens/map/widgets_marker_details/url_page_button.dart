@@ -9,8 +9,8 @@ class URLPageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.75,
-      height: MediaQuery.of(context).size.height * 0.06,
+      width: MediaQuery.of(context).size.width * 0.4,
+      height: MediaQuery.of(context).size.height * 0.1,
       child: FloatingActionButton(
           backgroundColor: Colors.blue[800],
           onPressed: () async {
@@ -21,7 +21,7 @@ class URLPageButton extends StatelessWidget {
             }
           },
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(60.0),
+            borderRadius: BorderRadius.circular(9.0),
           ),
           elevation: 7,
           child: const InnerShadow(
@@ -32,7 +32,7 @@ class URLPageButton extends StatelessWidget {
               child: Text(
                 'ODWIEDŹ STRONĘ',
                 style: TextStyle(
-                  fontSize: 28,
+                  fontSize: 27,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                   shadows: [
@@ -43,6 +43,7 @@ class URLPageButton extends StatelessWidget {
                     ),
                   ],
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
           )),

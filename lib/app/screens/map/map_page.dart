@@ -19,7 +19,7 @@ class MapPage extends StatefulWidget {
 }
 
 class MapPageState extends State<MapPage> {
-  static const LatLng tmpLocation = LatLng(51.7478755, 19.4519941);
+  static const LatLng TULcoordinates = LatLng(51.749923, 19.452604);
   Completer<GoogleMapController> mapController = Completer();
 
   Future<GoogleMapController> get mapControllerFuture => mapController.future;
@@ -86,7 +86,7 @@ class MapPageState extends State<MapPage> {
                   child: GoogleMap(
                     padding: const EdgeInsets.only(bottom: 0.0),
                     initialCameraPosition: const CameraPosition(
-                      target: tmpLocation,
+                      target: TULcoordinates,
                       zoom: 15,
                     ),
                     onMapCreated: (controller) async {
