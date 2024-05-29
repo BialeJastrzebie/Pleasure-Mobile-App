@@ -66,18 +66,22 @@ class _SlidingPanelState extends State<SlidingPanel> {
                 const PopularInfo(text: 'Klub Tago'),
                 const HeadingText(text: 'FILTRY:'),
                 CheckboxFilter(
-                    filter: Filter(id: 'favourite', name: 'Ulubione')),
-                CheckboxFilter(
-                  filter: Filter(id: 'restaurants', name: 'Restauracje'),
+                    filter: Filter(id: 'ulubione', name: 'Ulubione')
                 ),
                 CheckboxFilter(
-                  filter: Filter(id: 'theatre', name: 'Teatry'),
+                  filter: Filter(id: 'sklep', name: 'Sklepy'),
                 ),
                 CheckboxFilter(
-                  filter: Filter(id: 'pubs', name: 'Puby'),
+                  filter: Filter(id: 'jedzenie', name: 'Restauracje'),
                 ),
                 CheckboxFilter(
-                  filter: Filter(id: 'clubs', name: 'Kluby'),
+                  filter: Filter(id: 'teatr', name: 'Teatry'),
+                ),
+                CheckboxFilter(
+                  filter: Filter(id: 'pub', name: 'Puby'),
+                ),
+                CheckboxFilter(
+                  filter: Filter(id: 'klub', name: 'Kluby'),
                 ),
               ],
             ),
