@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
+import 'package:pleasure_mobile_app/app/screens/login/login_page.dart';
+import 'package:pleasure_mobile_app/app/shared/widgets/logout_button.dart';
 
 import '../../screens/map/map_page.dart';
 import '../../screens/schedule/schedule_page.dart';
@@ -128,6 +130,14 @@ class _BaseViewState extends State<BaseView> {
                       },
                       leadingIcon: const Icon(Icons.help),
                       title: "POMOC",
+                    ),
+                    LogoutButton(
+                        onTap: () {
+                          animateScreenChange(context, const LoginPage(),
+                              Curves.fastLinearToSlowEaseIn);
+                        },
+                        leadingIcon: const Icon(Icons.logout),
+                        title: "WYLOGUJ",
                     ),
                   ],
                 ),

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import '../themes/theme.dart';
 
-class MenuListTile extends StatelessWidget {
+class LogoutButton extends StatelessWidget {
   final Icon leadingIcon;
   final String title;
   final VoidCallback onTap;
 
-  const MenuListTile({
+  const LogoutButton({
     super.key,
     required this.leadingIcon,
     required this.title,
@@ -22,7 +22,7 @@ class MenuListTile extends StatelessWidget {
         width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
-          color: buttonColorMenu,
+          color: buttonColor,
           borderRadius: BorderRadius.circular(30),
           boxShadow: const [
             BoxShadow(
@@ -38,18 +38,18 @@ class MenuListTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InnerShadow(
-                blur: 2,
+                blur: 1,
                 color: Colors.black.withOpacity(0.8),
                 offset: const Offset(0, 0),
                 child: Icon(
                   leadingIcon.icon,
                   size: 30.0,
-                  color: secondaryColor,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(width: 3.0, height: 0.1),
               InnerShadow(
-                blur: 2,
+                blur: 1,
                 color: Colors.black.withOpacity(0.8),
                 offset: const Offset(0, 0),
                 child: Text(
@@ -57,7 +57,7 @@ class MenuListTile extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w900,
-                      color: secondaryColor),
+                      color: Colors.white),
                 ),
               ),
             ],
