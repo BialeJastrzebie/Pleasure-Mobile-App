@@ -1,8 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
-import 'package:pleasure_mobile_app/app/screens/map/map_page.dart';
-
 
 class FilterState extends ChangeNotifier {
   final Set<String> _activeFilters = {};

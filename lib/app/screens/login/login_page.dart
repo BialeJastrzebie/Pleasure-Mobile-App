@@ -162,7 +162,6 @@ Future<String> authenticate(String username, String password) async {
 Future<String> getToken() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
-  print(token);
   if (token == null) {
     throw Exception('No token found');
   }

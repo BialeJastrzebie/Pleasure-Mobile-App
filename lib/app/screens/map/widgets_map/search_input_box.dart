@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
+import 'package:pleasure_mobile_app/app/screens/login/login_page.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '/app/shared/themes/theme.dart';
 
@@ -8,7 +9,14 @@ class SearchInputBox extends StatefulWidget {
   VoidCallback onTap;
   Future<GoogleMapController> mapControllerFuture;
   PanelController panelController = PanelController();
-  SearchInputBox({super.key, required this.onTap, required this.mapControllerFuture, required this.panelController});
+  Set<String> locationNames;
+  SearchInputBox({
+    super.key,
+    required this.onTap,
+    required this.mapControllerFuture,
+    required this.panelController,
+    required this.locationNames
+  });
 
   @override
   State<SearchInputBox> createState() => _SearchInputBoxState();
@@ -16,14 +24,13 @@ class SearchInputBox extends StatefulWidget {
 
 
 class _SearchInputBoxState extends State<SearchInputBox> {
-  final List<String> _options = [
-    'Zahir Kebab',
-    'Indeks',
-    'Żabka',
-    'Biedronka',
-    'Lidl',
-    'Dino',
-  ];
+  late Set<String> _options;
+
+  @override
+  void initState() {
+    super.initState();
+    _options = widget.locationNames;
+  }
 
   navigateToLocation(LatLng location) async {
     final GoogleMapController controller = await widget.mapControllerFuture;
@@ -85,11 +92,13 @@ class _SearchInputBoxState extends State<SearchInputBox> {
               onTap: () {
                 widget.onTap();
               },
-              onSubmitted: (value) {
-                LatLng location = getLocationForPlace(value);
-                navigateToLocation(location);
-                widget.panelController.close();
-                FocusScope.of(context).unfocus();
+              onSubmitted: (value) async {
+                LatLng location = await getLocationForPlace(value);
+                if (mounted) { // Check if the widget is still in the tree
+                  navigateToLocation(location);
+                  widget.panelController.close();
+                  FocusScope.of(context).unfocus();
+                }
               },
             );
           },
@@ -109,12 +118,14 @@ class _SearchInputBoxState extends State<SearchInputBox> {
                       itemBuilder: (BuildContext context, int index) {
                         final String option = options.elementAt(index);
                         return GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             onSelected(option);
-                            LatLng location = getLocationForPlace(option);
-                            navigateToLocation(location);
-                            widget.panelController.close();
-                            FocusScope.of(context).unfocus();
+                            LatLng location = await getLocationForPlace(option);
+                            if (mounted) { // Check if the widget is still in the tree
+                              navigateToLocation(location);
+                              widget.panelController.close();
+                              FocusScope.of(context).unfocus();
+                            }
                           },
                           child: ListTile(
                             title: Text(option,
@@ -135,24 +146,15 @@ class _SearchInputBoxState extends State<SearchInputBox> {
     );
   }
 
-  getLocationForPlace(String markerId) {
-    switch (markerId) {
-      case 'Zahir Kebab':
-        return const LatLng(51.107883, 17.038538);
-      case 'Indeks':
-        return const LatLng(51.107883, 17.038538);
-      case 'Żabka':
-        return const LatLng(51.107883, 17.038538);
-      case 'Biedronka':
-        return const LatLng(51.107883, 17.038538);
-      case 'Lidl':
-        return const LatLng(51.107883, 17.038538);
-      case 'Dino':
-        return const LatLng(51.107883, 17.038538);
-      default:
-        return const LatLng(51.107883, 17.038538);
+  Future<LatLng> getLocationForPlace(String markerId) async {
+    var allLocations = await fetchData('http://localhost:8000/api/map/locations/');
+    var location = allLocations.firstWhere((element) => element['name'] == markerId);
+    var latitude = double.parse(location['latitude']);
+    var longitude = double.parse(location['longitude']);
+    if (mounted) { // Check if the widget is still in the tree
+      return LatLng(latitude, longitude);
     }
-
+    return const LatLng(0, 0);
   }
 }
 

@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
               const Spacer(),
               Button(
                   text: "MAPA",
-                  onPressed: () async {
+                  onPressed: () {
                     animateScreenChange(
                         context, const MapPage(), Curves.fastLinearToSlowEaseIn);
                   }),

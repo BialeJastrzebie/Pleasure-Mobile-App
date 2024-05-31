@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pleasure_mobile_app/app/screens/login/login_page.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets_map/sliding_panel.dart';
+import 'package:pleasure_mobile_app/app/shared/themes/theme.dart';
 import 'package:provider/provider.dart';
 import '../../shared/utils/change_screen_animation.dart';
 import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
@@ -23,10 +24,14 @@ class MapPageState extends State<MapPage> {
   Completer<GoogleMapController> mapController = Completer();
 
   Future<GoogleMapController> get mapControllerFuture => mapController.future;
+
   get activeFilterSize => Provider.of<FilterState>(context).filterSize;
+
   get activeFilters => Provider.of<FilterState>(context).activeFilters;
 
   Set<String> favouriteLocations = {};
+
+  Set<String> locationNames = {};
 
   /////////////////////////////////////////////////////////////////////////////
   //Element for icon handling
@@ -71,46 +76,112 @@ class MapPageState extends State<MapPage> {
     }
   }
 
+  Future<Set<String>> fetchFavouriteLocations() async {
+    var value = await fetchData('http://localhost:8000/api/user/me');
+    List<dynamic> locations = value['favorite_locations'];
+    Set<String> locationsNames = {};
+    await Future.wait(locations.map((element) async {
+      String locationName = await fetchLocationName(element);
+      locationsNames.add(locationName);
+    }));
+    return locationsNames;
+  }
+
+  Future<String> fetchLocationName(int id) async {
+    var value = await fetchData('http://localhost:8000/api/map/locations/$id');
+    return value['name'];
+  }
+
+  Future<Set<String>> getLocationNames() async {
+    Set<String> locationNames = {};
+    var value = fetchData('http://localhost:8000/api/map/locations/');
+    value.then((value) {
+      value.forEach((element) {
+        locationNames.add(element['name']);
+      });
+    });
+    return locationNames;
+  }
+
+  bool isLoading = true;
+
+  Future<void> fetchAllData() async {
+    var results = await Future.wait([
+      fetchFavouriteLocations(),
+      getLocationNames(),
+    ]);
+
+    favouriteLocations = results[0];
+    locationNames = results[1];
+
+    await Future.delayed(const Duration(seconds: 1));
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAllData();
+  }
+
   final Map<String, Marker> _allMarkers = {};
 
   @override
   Widget build(BuildContext context) {
-    return BaseView(
-      body: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.8,
-                  child: GoogleMap(
-                    padding: const EdgeInsets.only(bottom: 0.0),
-                    initialCameraPosition: const CameraPosition(
-                      target: TULcoordinates,
-                      zoom: 15,
+    return Stack(
+      children: [
+        BaseView(
+          body: Scaffold(
+            body: Stack(
+              children: <Widget>[
+                Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      child: GoogleMap(
+                        padding: const EdgeInsets.only(bottom: 0.0),
+                        initialCameraPosition: const CameraPosition(
+                          target: TULcoordinates,
+                          zoom: 15,
+                        ),
+                        onMapCreated: (controller) async {
+                          mapController.complete(controller);
+                          fetchData('http://localhost:8000/api/map/locations/')
+                              .then((value) {
+                            value.forEach((element) {
+                              addMarker(element);
+                            });
+                          });
+                        },
+                        markers: getMarkers(),
+                        // Use the data from the Future
+                        myLocationEnabled: true,
+                      ),
                     ),
-                    onMapCreated: (controller) async {
-                      mapController.complete(controller);
-                      fetchData('http://localhost:8000/api/map/locations/')
-                          .then((value) {
-                        value.forEach((element) {
-                          addMarker(element);
-                        });
-                      });
-                      favouriteLocations = await fetchFavouriteLocations();
-                    },
-                    markers: getMarkers(),
-                    // Use the data from the Future
-                    myLocationEnabled: true,
-                  ),
+                  ],
                 ),
+                // DragFilter(activeFilters: activeFilters),
+                SlidingPanel(
+                    mapControllerFuture: mapControllerFuture,
+                    locationNames: locationNames),
               ],
             ),
-            // DragFilter(activeFilters: activeFilters),
-            SlidingPanel(mapControllerFuture: mapControllerFuture),
-          ],
+          ),
         ),
-      ),
+        if (isLoading)
+          const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(buttonColorMenu),
+                backgroundColor: secondaryColor,
+                strokeCap: StrokeCap.round,
+                strokeWidth: 6,
+              ),
+            ),
+          ),
+      ],
     );
   }
 
@@ -173,20 +244,4 @@ class MapPageState extends State<MapPage> {
 
     return customIcon;
   }
-}
-
-Future<Set<String>> fetchFavouriteLocations() async {
-  var value = await fetchData('http://localhost:8000/api/user/me');
-  List<dynamic> locations = value['favorite_locations'];
-  Set<String> locationsNames = {};
-  await Future.wait(locations.map((element) async {
-    String locationName = await fetchLocationName(element);
-    locationsNames.add(locationName);
-  }));
-  return locationsNames;
-}
-
-Future<String> fetchLocationName(int id) async {
-  var value = await fetchData('http://localhost:8000/api/map/locations/$id');
-  return value['name'];
 }
