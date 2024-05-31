@@ -31,8 +31,6 @@ class MapPageState extends State<MapPage> {
 
   Set<String> favouriteLocations = {};
 
-  Set<String> locationNames = {};
-
   /////////////////////////////////////////////////////////////////////////////
   //Element for icon handling
   BitmapDescriptor customIcon = BitmapDescriptor.defaultMarker;
@@ -92,27 +90,15 @@ class MapPageState extends State<MapPage> {
     return value['name'];
   }
 
-  Future<Set<String>> getLocationNames() async {
-    Set<String> locationNames = {};
-    var value = fetchData('http://localhost:8000/api/map/locations/');
-    value.then((value) {
-      value.forEach((element) {
-        locationNames.add(element['name']);
-      });
-    });
-    return locationNames;
-  }
+
 
   bool isLoading = true;
 
   Future<void> fetchAllData() async {
     var results = await Future.wait([
       fetchFavouriteLocations(),
-      getLocationNames(),
     ]);
-
     favouriteLocations = results[0];
-    locationNames = results[1];
 
     await Future.delayed(const Duration(seconds: 1));
     setState(() {
@@ -123,7 +109,9 @@ class MapPageState extends State<MapPage> {
   @override
   void initState() {
     super.initState();
-    fetchAllData();
+    Future.wait([
+      fetchAllData(),
+    ]);
   }
 
   final Map<String, Marker> _allMarkers = {};
@@ -164,8 +152,8 @@ class MapPageState extends State<MapPage> {
                 ),
                 // DragFilter(activeFilters: activeFilters),
                 SlidingPanel(
-                    mapControllerFuture: mapControllerFuture,
-                    locationNames: locationNames),
+                    mapControllerFuture: mapControllerFuture
+                   ),
               ],
             ),
           ),

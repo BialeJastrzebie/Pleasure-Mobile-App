@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
 import 'package:pleasure_mobile_app/app/screens/login/login_page.dart';
@@ -9,27 +10,28 @@ class SearchInputBox extends StatefulWidget {
   VoidCallback onTap;
   Future<GoogleMapController> mapControllerFuture;
   PanelController panelController = PanelController();
-  Set<String> locationNames;
-  SearchInputBox({
-    super.key,
-    required this.onTap,
-    required this.mapControllerFuture,
-    required this.panelController,
-    required this.locationNames
-  });
+
+  SearchInputBox(
+      {super.key,
+      required this.onTap,
+      required this.mapControllerFuture,
+      required this.panelController});
 
   @override
   State<SearchInputBox> createState() => _SearchInputBoxState();
 }
 
-
 class _SearchInputBoxState extends State<SearchInputBox> {
-  late Set<String> _options;
+  Set<String> options = {};
 
   @override
   void initState() {
     super.initState();
-    _options = widget.locationNames;
+    getLocationNames().then((locationNames) {
+      setState(() {
+        options = locationNames;
+      });
+    });
   }
 
   navigateToLocation(LatLng location) async {
@@ -49,7 +51,7 @@ class _SearchInputBoxState extends State<SearchInputBox> {
             if (textEditingValue.text == '') {
               return const Iterable<String>.empty();
             }
-            return _options.where((String option) {
+            return options.where((String option) {
               return option
                   .toLowerCase()
                   .contains(textEditingValue.text.toLowerCase());
@@ -94,11 +96,9 @@ class _SearchInputBoxState extends State<SearchInputBox> {
               },
               onSubmitted: (value) async {
                 LatLng location = await getLocationForPlace(value);
-                if (mounted) { // Check if the widget is still in the tree
-                  navigateToLocation(location);
-                  widget.panelController.close();
-                  FocusScope.of(context).unfocus();
-                }
+                navigateToLocation(location);
+                widget.panelController.close();
+                SystemChannels.textInput.invokeMethod('TextInput.hide');
               },
             );
           },
@@ -121,11 +121,10 @@ class _SearchInputBoxState extends State<SearchInputBox> {
                           onTap: () async {
                             onSelected(option);
                             LatLng location = await getLocationForPlace(option);
-                            if (mounted) { // Check if the widget is still in the tree
-                              navigateToLocation(location);
-                              widget.panelController.close();
-                              FocusScope.of(context).unfocus();
-                            }
+                            navigateToLocation(location);
+                            widget.panelController.close();
+                            SystemChannels.textInput
+                                .invokeMethod('TextInput.hide');
                           },
                           child: ListTile(
                             title: Text(option,
@@ -147,14 +146,28 @@ class _SearchInputBoxState extends State<SearchInputBox> {
   }
 
   Future<LatLng> getLocationForPlace(String markerId) async {
-    var allLocations = await fetchData('http://localhost:8000/api/map/locations/');
-    var location = allLocations.firstWhere((element) => element['name'] == markerId);
+    var allLocations =
+        await fetchData('http://localhost:8000/api/map/locations/');
+    var location = allLocations.firstWhere((element) =>
+        element['name'].toString().toLowerCase() ==
+        markerId.toString().toLowerCase());
     var latitude = double.parse(location['latitude']);
     var longitude = double.parse(location['longitude']);
-    if (mounted) { // Check if the widget is still in the tree
+    if (mounted) {
+      // Check if the widget is still in the tree
       return LatLng(latitude, longitude);
     }
     return const LatLng(0, 0);
   }
-}
 
+  Future<Set<String>> getLocationNames() async {
+    Set<String> locationNames = {};
+    var value = fetchData('http://localhost:8000/api/map/locations/');
+    value.then((value) {
+      value.forEach((element) {
+        locationNames.add(element['name']);
+      });
+    });
+    return locationNames;
+  }
+}

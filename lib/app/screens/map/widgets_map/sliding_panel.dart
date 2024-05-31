@@ -13,9 +13,7 @@ import 'heading_text.dart';
 class SlidingPanel extends StatefulWidget {
   final Future<GoogleMapController> mapControllerFuture;
 
-  Set<String> locationNames;
-
-  SlidingPanel({super.key, required this.mapControllerFuture, required this.locationNames});
+  const SlidingPanel({super.key, required this.mapControllerFuture});
 
   @override
   State<SlidingPanel> createState() => _SlidingPanelState();
@@ -66,7 +64,6 @@ class _SlidingPanelState extends State<SlidingPanel> {
                   },
                   mapControllerFuture: widget.mapControllerFuture,
                   panelController: _panelController,
-                  locationNames: widget.locationNames,
                 ),
                 const HeadingText(text: 'POPULARNE:'),
                 const PopularInfo(text: 'Indeks'),
