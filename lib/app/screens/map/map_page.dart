@@ -27,10 +27,10 @@ class MapPageState extends State<MapPage> {
   Future<GoogleMapController> get mapControllerFuture => mapController.future;
 
   get activeFilterSize =>
-      Provider.of<FilterState>(context, listen: false).filterSize;
+      Provider.of<FilterState>(context).filterSize;
 
   get activeFilters =>
-      Provider.of<FilterState>(context, listen: false).activeFilters;
+      Provider.of<FilterState>(context).activeFilters;
 
   Set<String> favouriteLocations = {};
 
@@ -41,7 +41,7 @@ class MapPageState extends State<MapPage> {
       if (activeFilters.contains('ulubione') && activeFilterSize > 1) {
         return _allMarkers.values.where((marker) {
           return favouriteLocations.contains(marker.markerId.value) ||
-              activeFilters.contains(marker.infoWindow.snippet);
+              activeFilters.contains(_markerCategories[marker.markerId.value]);
         }).toSet();
       } else if (activeFilters.contains('ulubione')) {
         return _allMarkers.values.where((marker) {
@@ -49,7 +49,7 @@ class MapPageState extends State<MapPage> {
         }).toSet();
       } else {
         return _allMarkers.values.where((marker) {
-          return activeFilters.contains(marker.infoWindow.snippet);
+          return activeFilters.contains(_markerCategories[marker.markerId.value]);
         }).toSet();
       }
     }
@@ -94,6 +94,7 @@ class MapPageState extends State<MapPage> {
   }
 
   final Map<String, Marker> _allMarkers = {};
+  final Map<String, String> _markerCategories = {};
 
   @override
   Widget build(BuildContext context) {
@@ -169,10 +170,6 @@ class MapPageState extends State<MapPage> {
         logicalSize: const Size(300, 300),
         imageSize: const Size(300, 300),
       ),
-      infoWindow: InfoWindow(
-        title: markerID,
-        snippet: category,
-      ),
       onTap: () {
         animateScreenChange(
             context,
@@ -190,6 +187,7 @@ class MapPageState extends State<MapPage> {
 
     setState(() {
       _allMarkers[markerID] = marker;
+      _markerCategories[markerID] = category;
     });
   }
 }
