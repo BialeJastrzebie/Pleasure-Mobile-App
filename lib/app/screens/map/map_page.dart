@@ -90,8 +90,6 @@ class MapPageState extends State<MapPage> {
     return value['name'];
   }
 
-
-
   bool isLoading = true;
 
   Future<void> fetchAllData() async {
@@ -100,7 +98,7 @@ class MapPageState extends State<MapPage> {
     ]);
     favouriteLocations = results[0];
 
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 3));
     setState(() {
       isLoading = false;
     });
