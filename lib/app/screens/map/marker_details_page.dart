@@ -61,11 +61,16 @@ class MarkerDetailsPage extends StatelessWidget {
         ),
         DescriptionText(description: description),
         const Padding(padding: EdgeInsets.only(top: 20)),
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          CouponInfo(text: couponInfo),
-          const Padding(padding: EdgeInsets.only(left: 15)),
-          const CouponButton(),
-        ]),
+        couponInfo != 'null'
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CouponInfo(text: couponInfo),
+                  const Padding(padding: EdgeInsets.only(left: 15)),
+                  const CouponButton(),
+                ],
+              )
+            : Container(),
         const Padding(padding: EdgeInsets.only(top: 15)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
