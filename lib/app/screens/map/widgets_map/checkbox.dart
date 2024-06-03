@@ -7,14 +7,15 @@ import '../filter_state.dart';
 class Filter {
   final String id;
   final String name;
+  
 
   Filter({required this.id, required this.name});
 }
 
 class CheckboxFilter extends StatefulWidget {
   final Filter filter;
-
-  const CheckboxFilter({super.key, required this.filter});
+  final Function updateFavouriteLocations;
+  const CheckboxFilter({super.key, required this.filter, required this.updateFavouriteLocations});
 
   @override
   State<CheckboxFilter> createState() => _CheckboxFilterState();
@@ -22,7 +23,7 @@ class CheckboxFilter extends StatefulWidget {
 
 class _CheckboxFilterState extends State<CheckboxFilter> {
   bool isChecked = false;
-
+  
   @override
   Widget build(BuildContext context) {
     final filterState = Provider.of<FilterState>(context);
@@ -41,7 +42,7 @@ class _CheckboxFilterState extends State<CheckboxFilter> {
                 } else {
                   filterState.removeFilter(widget.filter.id);
                 }
-                print(filterState.activeFilters);
+                widget.updateFavouriteLocations();
               });
             },
             child: Container(

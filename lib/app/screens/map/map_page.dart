@@ -26,26 +26,25 @@ class MapPageState extends State<MapPage> {
 
   Future<GoogleMapController> get mapControllerFuture => mapController.future;
 
-  get activeFilterSize =>
-      Provider.of<FilterState>(context).filterSize;
-
   get activeFilters =>
       Provider.of<FilterState>(context).activeFilters;
 
-  Set<String> favouriteLocations = {};
+  Set<String> _favouriteLocations = {};
+
+  Set<String> get favouriteLocations => _favouriteLocations;
 
   Set<Marker> getMarkers() {
     if (activeFilters.isEmpty) {
       return _allMarkers.values.toSet();
     } else {
-      if (activeFilters.contains('ulubione') && activeFilterSize > 1) {
+      if (activeFilters.contains('ulubione') && activeFilters.length > 1) {
         return _allMarkers.values.where((marker) {
-          return favouriteLocations.contains(marker.markerId.value) ||
+          return _favouriteLocations.contains(marker.markerId.value) ||
               activeFilters.contains(_markerCategories[marker.markerId.value]);
         }).toSet();
       } else if (activeFilters.contains('ulubione')) {
         return _allMarkers.values.where((marker) {
-          return favouriteLocations.contains(marker.markerId.value);
+          return _favouriteLocations.contains(marker.markerId.value);
         }).toSet();
       } else {
         return _allMarkers.values.where((marker) {
@@ -77,7 +76,7 @@ class MapPageState extends State<MapPage> {
     var results = await Future.wait([
       fetchFavouriteLocations(),
     ]);
-    favouriteLocations = results[0];
+    _favouriteLocations = results[0];
 
     await Future.delayed(const Duration(seconds: 1));
     setState(() {
@@ -133,7 +132,8 @@ class MapPageState extends State<MapPage> {
                   ],
                 ),
                 // DragFilter(activeFilters: activeFilters),
-                SlidingPanel(mapControllerFuture: mapControllerFuture),
+                SlidingPanel(mapControllerFuture: mapControllerFuture,
+                    updateFavouriteLocations: updateFavouriteLocations),
               ],
             ),
           ),
@@ -190,4 +190,10 @@ class MapPageState extends State<MapPage> {
       _markerCategories[markerID] = category;
     });
   }
+
+  updateFavouriteLocations() async {
+    _favouriteLocations = await fetchFavouriteLocations();
+    setState(() {});
+  }
 }
+

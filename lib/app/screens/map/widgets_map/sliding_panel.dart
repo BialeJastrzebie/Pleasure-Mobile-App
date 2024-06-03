@@ -12,8 +12,12 @@ import 'heading_text.dart';
 
 class SlidingPanel extends StatefulWidget {
   final Future<GoogleMapController> mapControllerFuture;
+  final Function updateFavouriteLocations;
 
-  const SlidingPanel({super.key, required this.mapControllerFuture});
+  const SlidingPanel(
+      {super.key,
+      required this.mapControllerFuture,
+      required this.updateFavouriteLocations});
 
   @override
   State<SlidingPanel> createState() => _SlidingPanelState();
@@ -70,22 +74,23 @@ class _SlidingPanelState extends State<SlidingPanel> {
                 const PopularInfo(text: 'Klub Tago'),
                 const HeadingText(text: 'FILTRY:'),
                 CheckboxFilter(
-                    filter: Filter(id: 'ulubione', name: 'Ulubione')),
+                    filter: Filter(id: 'ulubione', name: 'Ulubione'),
+                    updateFavouriteLocations: widget.updateFavouriteLocations),
                 CheckboxFilter(
-                  filter: Filter(id: 'sklep', name: 'Sklepy'),
-                ),
+                    filter: Filter(id: 'sklep', name: 'Sklepy'),
+                    updateFavouriteLocations: widget.updateFavouriteLocations),
                 CheckboxFilter(
-                  filter: Filter(id: 'jedzenie', name: 'Restauracje'),
-                ),
+                    filter: Filter(id: 'jedzenie', name: 'Restauracje'),
+                    updateFavouriteLocations: widget.updateFavouriteLocations),
                 CheckboxFilter(
-                  filter: Filter(id: 'teatr', name: 'Teatry'),
-                ),
+                    filter: Filter(id: 'teatr', name: 'Teatry'),
+                    updateFavouriteLocations: widget.updateFavouriteLocations),
                 CheckboxFilter(
-                  filter: Filter(id: 'pub', name: 'Puby'),
-                ),
+                    filter: Filter(id: 'pub', name: 'Puby'),
+                    updateFavouriteLocations: widget.updateFavouriteLocations),
                 CheckboxFilter(
-                  filter: Filter(id: 'klub', name: 'Kluby'),
-                ),
+                    filter: Filter(id: 'klub', name: 'Kluby'),
+                    updateFavouriteLocations: widget.updateFavouriteLocations),
               ],
             ),
           ),

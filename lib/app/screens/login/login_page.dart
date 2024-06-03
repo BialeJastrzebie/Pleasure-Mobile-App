@@ -185,3 +185,26 @@ Future<dynamic> fetchData(String url) async {
     throw Exception('Failed to load data');
   }
 }
+
+
+Future<dynamic> patchData(String url, Map<String, dynamic> data) async {
+  String token = await getToken();
+  String jsonString = jsonEncode(data);
+
+  final response = await http.patch(
+    Uri.parse(url),
+    headers: <String, String>{
+      'Authorization': 'Token $token',
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonString,
+  );
+  print(response.body);
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    String responseBody = utf8.decode(response.bodyBytes);
+    return jsonDecode(responseBody);
+  } else {
+    throw Exception('Failed to patch data');
+  }
+}
