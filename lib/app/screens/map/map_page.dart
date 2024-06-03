@@ -1,12 +1,12 @@
 import 'dart:async';
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pleasure_mobile_app/app/screens/login/login_page.dart';
+import 'package:pleasure_mobile_app/app/screens/map/widgets_map/custom_marker.dart';
 import 'package:pleasure_mobile_app/app/screens/map/widgets_map/sliding_panel.dart';
 import 'package:pleasure_mobile_app/app/shared/themes/theme.dart';
 import 'package:provider/provider.dart';
+import 'package:widget_to_marker/widget_to_marker.dart';
 import '../../shared/utils/change_screen_animation.dart';
 import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
 import 'filter_state.dart';
@@ -20,38 +20,19 @@ class MapPage extends StatefulWidget {
 }
 
 class MapPageState extends State<MapPage> {
-  static const LatLng TULcoordinates = LatLng(51.749923, 19.452604);
+  static const LatLng tulCoordinates = LatLng(51.749923, 19.452604);
+
   Completer<GoogleMapController> mapController = Completer();
 
   Future<GoogleMapController> get mapControllerFuture => mapController.future;
 
-  get activeFilterSize => Provider.of<FilterState>(context).filterSize;
+  get activeFilterSize =>
+      Provider.of<FilterState>(context, listen: false).filterSize;
 
-  get activeFilters => Provider.of<FilterState>(context).activeFilters;
+  get activeFilters =>
+      Provider.of<FilterState>(context, listen: false).activeFilters;
 
   Set<String> favouriteLocations = {};
-
-  /////////////////////////////////////////////////////////////////////////////
-  //Element for icon handling
-  BitmapDescriptor customIcon = BitmapDescriptor.defaultMarker;
-
-  Future<Uint8List> getBytesFromAsset(String path, int width) async {
-    ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width);
-    ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
-        .buffer
-        .asUint8List();
-  }
-
-  Future<BitmapDescriptor> getBitmapDescriptorFromAssetBytes(
-      String path, int width) async {
-    final Uint8List imageData = await getBytesFromAsset(path, width);
-    return BitmapDescriptor.fromBytes(imageData);
-  }
-
-  ///////////////////////////////////////////////////////////////////////////
 
   Set<Marker> getMarkers() {
     if (activeFilters.isEmpty) {
@@ -98,7 +79,7 @@ class MapPageState extends State<MapPage> {
     ]);
     favouriteLocations = results[0];
 
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
     setState(() {
       isLoading = false;
     });
@@ -126,32 +107,32 @@ class MapPageState extends State<MapPage> {
                   children: [
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.8,
-                      child: GoogleMap(
-                        padding: const EdgeInsets.only(bottom: 0.0),
-                        initialCameraPosition: const CameraPosition(
-                          target: TULcoordinates,
-                          zoom: 15,
-                        ),
-                        onMapCreated: (controller) async {
-                          mapController.complete(controller);
-                          fetchData('http://localhost:8000/api/map/locations/')
-                              .then((value) {
-                            value.forEach((element) {
-                              addMarker(element);
-                            });
-                          });
-                        },
-                        markers: getMarkers(),
-                        // Use the data from the Future
-                        myLocationEnabled: true,
+                      child: Stack(
+                        children: [
+                          GoogleMap(
+                            padding: const EdgeInsets.only(bottom: 0.0),
+                            initialCameraPosition: const CameraPosition(
+                              target: tulCoordinates,
+                              zoom: 15,
+                            ),
+                            onMapCreated: (controller) async {
+                              mapController.complete(controller);
+                              var value = await fetchData('http://localhost:8000/api/map/locations/');
+                              for (var element in value) {
+                                await addMarker(element);
+                              }
+                            },
+                            markers: getMarkers(),
+                            // Use the data from the Future
+                            myLocationEnabled: true,
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
                 // DragFilter(activeFilters: activeFilters),
-                SlidingPanel(
-                    mapControllerFuture: mapControllerFuture
-                   ),
+                SlidingPanel(mapControllerFuture: mapControllerFuture),
               ],
             ),
           ),
@@ -177,11 +158,17 @@ class MapPageState extends State<MapPage> {
         double.parse(element['latitude']), double.parse(element['longitude']));
     String category = element['category'];
     String pathToImage = element['image'];
-    BitmapDescriptor markerIcon = await chooseIcon(category);
+    // BitmapDescriptor markerIcon = await chooseIcon(category);
     var marker = Marker(
       markerId: MarkerId(markerID),
       position: location,
-      icon: markerIcon,
+      icon: await CustomMarker(
+        markerId: markerID,
+        category: category,
+      ).toBitmapDescriptor(
+        logicalSize: const Size(300, 300),
+        imageSize: const Size(300, 300),
+      ),
       infoWindow: InfoWindow(
         title: markerID,
         snippet: category,
@@ -204,30 +191,5 @@ class MapPageState extends State<MapPage> {
     setState(() {
       _allMarkers[markerID] = marker;
     });
-  }
-
-  Future<BitmapDescriptor> chooseIcon(String category) async {
-    BitmapDescriptor customIcon;
-
-    if (category == 'jedzenie') {
-      customIcon =
-          await getBitmapDescriptorFromAssetBytes('images/menu.png', 100);
-    } else if (category == 'sklep') {
-      customIcon =
-          await getBitmapDescriptorFromAssetBytes('images/shop.png', 100);
-    } else if (category == 'klub') {
-      customIcon =
-          await getBitmapDescriptorFromAssetBytes('images/club.png', 100);
-    } else if (category == 'teatr') {
-      customIcon =
-          await getBitmapDescriptorFromAssetBytes('images/theater.png', 100);
-    } else if (category == 'pub') {
-      customIcon =
-          await getBitmapDescriptorFromAssetBytes('images/pub.png', 100);
-    } else {
-      customIcon = BitmapDescriptor.defaultMarker;
-    }
-
-    return customIcon;
   }
 }
