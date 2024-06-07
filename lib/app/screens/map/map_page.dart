@@ -26,8 +26,7 @@ class MapPageState extends State<MapPage> {
 
   Future<GoogleMapController> get mapControllerFuture => mapController.future;
 
-  get activeFilters =>
-      Provider.of<FilterState>(context).activeFilters;
+  get activeFilters => Provider.of<FilterState>(context).activeFilters;
 
   Set<String> _favouriteLocations = {};
 
@@ -48,7 +47,8 @@ class MapPageState extends State<MapPage> {
         }).toSet();
       } else {
         return _allMarkers.values.where((marker) {
-          return activeFilters.contains(_markerCategories[marker.markerId.value]);
+          return activeFilters
+              .contains(_markerCategories[marker.markerId.value]);
         }).toSet();
       }
     }
@@ -117,7 +117,8 @@ class MapPageState extends State<MapPage> {
                             ),
                             onMapCreated: (controller) async {
                               mapController.complete(controller);
-                              var value = await fetchData('http://localhost:8000/api/map/locations/');
+                              var value = await fetchData(
+                                  'http://localhost:8000/api/map/locations/');
                               for (var element in value) {
                                 await addMarker(element);
                               }
@@ -132,7 +133,8 @@ class MapPageState extends State<MapPage> {
                   ],
                 ),
                 // DragFilter(activeFilters: activeFilters),
-                SlidingPanel(mapControllerFuture: mapControllerFuture,
+                SlidingPanel(
+                    mapControllerFuture: mapControllerFuture,
                     updateFavouriteLocations: updateFavouriteLocations),
               ],
             ),
