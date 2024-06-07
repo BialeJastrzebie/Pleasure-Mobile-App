@@ -36,7 +36,7 @@ class _SearchInputBoxState extends State<SearchInputBox> {
 
   navigateToLocation(LatLng location) async {
     final GoogleMapController controller = await widget.mapControllerFuture;
-    controller.animateCamera(CameraUpdate.newLatLng(location));
+    controller.animateCamera(CameraUpdate.newLatLngZoom(location, 20));
   }
 
   @override
