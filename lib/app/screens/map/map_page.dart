@@ -197,4 +197,3 @@ class MapPageState extends State<MapPage> {
     setState(() {});
   }
 }
-

@@ -28,7 +28,8 @@ class MarkerDetailsPage extends StatelessWidget {
       required this.address,
       required this.couponInfo,
       required this.urlPageButton,
-    required this.updateFavouriteLocations,
+      required this.updateFavouriteLocations,
+
   });
 
   @override
