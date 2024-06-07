@@ -18,6 +18,7 @@ class MarkerDetailsPage extends StatelessWidget {
   final String address;
   final String couponInfo;
   final String urlPageButton;
+  final Function updateFavouriteLocations;
 
   const MarkerDetailsPage({
       super.key,
@@ -27,6 +28,7 @@ class MarkerDetailsPage extends StatelessWidget {
       required this.address,
       required this.couponInfo,
       required this.urlPageButton,
+    required this.updateFavouriteLocations,
   });
 
   @override
@@ -133,6 +135,7 @@ class MarkerDetailsPage extends StatelessWidget {
                                   'http://localhost:8000/api/user/me/', {
                                 'favorite_locations': favouriteLocations,
                               });
+                              await updateFavouriteLocations();
                               return !isLiked;
                             });
                       }

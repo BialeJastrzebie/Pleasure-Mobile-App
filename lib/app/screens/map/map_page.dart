@@ -180,6 +180,7 @@ class MapPageState extends State<MapPage> {
               address: element['address'],
               couponInfo: element['coupon'],
               urlPageButton: element['url'],
+              updateFavouriteLocations: updateFavouriteLocations,
             ),
             Curves.fastLinearToSlowEaseIn);
       },
