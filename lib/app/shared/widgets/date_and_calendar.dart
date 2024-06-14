@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../themes/theme.dart';
 class DateAndCalendar extends StatelessWidget {
   const DateAndCalendar({Key? key}) : super(key: key);
 
@@ -11,7 +11,7 @@ class DateAndCalendar extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.15,
           height: MediaQuery.of(context).size.width * 0.15,
           decoration: BoxDecoration(
-            color: Color(0xFF7F0000),
+            color: backgroundColor,
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
               BoxShadow(
@@ -30,13 +30,13 @@ class DateAndCalendar extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Expanded(
           child: Container(
             width: MediaQuery.of(context).size.width * 0.2,
             height: MediaQuery.of(context).size.width * 0.15,
             decoration: BoxDecoration(
-              color: Color(0xFF7F0000),
+              color: backgroundColor,
               borderRadius: BorderRadius.circular(10.0),
               boxShadow: [
                 BoxShadow(
@@ -47,12 +47,12 @@ class DateAndCalendar extends StatelessWidget {
                 ),
               ],
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'Piątek',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: darkerWhiteTextColor,
                 ),
               ),
             ),
