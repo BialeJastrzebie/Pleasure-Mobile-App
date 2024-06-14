@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../../shared/themes/theme.dart';
 class IntegratedScheduleBox extends StatelessWidget {
   const IntegratedScheduleBox({Key? key}) : super(key: key);
 
@@ -11,7 +11,7 @@ class IntegratedScheduleBox extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height * 0.10,
             decoration: BoxDecoration(
-              color: Color(0xFFFFFEFE),
+              color: buttonColorMenu,
               borderRadius: BorderRadius.circular(21.0),
               boxShadow: [
                 BoxShadow(
@@ -30,7 +30,7 @@ class IntegratedScheduleBox extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.15,
               height: MediaQuery.of(context).size.height * 0.038,
               decoration: BoxDecoration(
-                color: Color(0xFF7F0000),
+                color: backgroundColor,
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Center(
@@ -38,7 +38,8 @@ class IntegratedScheduleBox extends StatelessWidget {
                   '9:00',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: darkerWhiteTextColor,
+
                   ),
                 ),
               ),
@@ -50,7 +51,7 @@ class IntegratedScheduleBox extends StatelessWidget {
             child: Text(
               'Igor Frątczak, Krystian Juszczyk',
               style: TextStyle(
-                color: Color(0xFF7F0000),
+                color: backgroundColor,
               ),
             ),
           ),
