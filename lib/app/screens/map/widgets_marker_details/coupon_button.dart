@@ -1,11 +1,14 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
+import 'package:pleasure_mobile_app/app/screens/login/login_page.dart';
 import '/app/shared/themes/theme.dart';
 
 class CouponButton extends StatefulWidget {
-  const CouponButton({super.key});
+  final String markerId;
+  const CouponButton({super.key, required this.markerId});
 
   @override
   _CouponButtonState createState() => _CouponButtonState();
@@ -15,16 +18,27 @@ class _CouponButtonState extends State<CouponButton> {
   bool _isClicked = false;
 
   @override
+  void initState() {
+    super.initState();
+    checkIfReceived(widget.markerId).then((value) {
+      setState(() {
+        _isClicked = value;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.34,
       height: MediaQuery.of(context).size.height * 0.09,
       child: FloatingActionButton(
         backgroundColor: _isClicked ? secondaryColor : buttonColor,
-        onPressed: () {
-          setState(() {
-            _isClicked = true;
-          });
+        onPressed: () async {
+          if(_isClicked) {
+            return;
+          }
+          addToReceived(widget.markerId);
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(60.0),
@@ -55,7 +69,41 @@ class _CouponButtonState extends State<CouponButton> {
       ),
     );
   }
+
+  Future<bool> checkIfReceived(String markerId) async {
+    final value = await fetchData('http://localhost:8000/api/user/me');
+    for (var element in value['coupon_received_locations']) {
+      final locationValue =
+      await fetchData('http://localhost:8000/api/map/locations/$element');
+      if (locationValue['name'] == markerId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  Future<void> addToReceived(String markerId) async {
+    int markerPk = 0;
+    var value = await fetchData(
+        'http://localhost:8000/api/map/locations/');
+    for (var element in value) {
+      if (element['name'] == markerId) {
+        markerPk = element['id'];
+      }
+    }
+
+    value = await fetchData(
+        'http://localhost:8000/api/user/me');
+    var receivedLocations = value['coupon_received_locations'];
+
+    receivedLocations.add(markerPk);
+
+    await patchData(
+        'http://localhost:8000/api/user/me/', {
+      'coupon_received_locations': receivedLocations,
+    });
+    setState(() {
+        _isClicked = true;
+    });
+  }
 }
-
-
-

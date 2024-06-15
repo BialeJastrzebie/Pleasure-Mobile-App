@@ -77,7 +77,7 @@ class MarkerDetailsPage extends StatelessWidget {
                 children: [
                   CouponInfo(text: couponInfo),
                   const Padding(padding: EdgeInsets.only(left: 15)),
-                  const CouponButton(),
+                  CouponButton(markerId: markerId),
                 ],
               )
             : const SizedBox(),
