@@ -29,44 +29,68 @@ class _CouponButtonState extends State<CouponButton> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.34,
-      height: MediaQuery.of(context).size.height * 0.09,
-      child: FloatingActionButton(
-        backgroundColor: _isClicked ? secondaryColor : buttonColor,
-        onPressed: () async {
-          if(_isClicked) {
-            return;
-          }
-          addToReceived(widget.markerId);
-        },
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(60.0),
-        ),
-        elevation: 5,
-        child: InnerShadow(
-          blur: 1,
-          color: Colors.black12,
-          offset: const Offset(0, 2),
-          child: Center(
-            child: Text(
-              _isClicked ? 'Odebrano' : 'Odbierz',
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-                shadows: [
-                  Shadow(
-                    color: Colors.black12,
-                    blurRadius: 2,
-                    offset: Offset(0, 3),
-                  ),
-                ],
+    return FutureBuilder<bool>(
+      future: checkIfReceived(widget.markerId),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(buttonColorMenu),
+                backgroundColor: secondaryColor,
+                strokeCap: StrokeCap.round,
+                strokeWidth: 6,
               ),
-            ),
-          ),
-        ),
-      ),
+            ],
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            _isClicked = snapshot.data ?? false;
+            return SizedBox(
+              width: MediaQuery.of(context).size.width * 0.34,
+              height: MediaQuery.of(context).size.height * 0.09,
+              child: FloatingActionButton(
+                backgroundColor: _isClicked ? secondaryColor : buttonColor,
+                onPressed: () async {
+                  if(_isClicked) {
+                    return;
+                  }
+                  addToReceived(widget.markerId);
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(60.0),
+                ),
+                elevation: 5,
+                child: InnerShadow(
+                  blur: 1,
+                  color: Colors.black12,
+                  offset: const Offset(0, 2),
+                  child: Center(
+                    child: Text(
+                      _isClicked ? 'Odebrano' : 'Odbierz',
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black12,
+                            blurRadius: 2,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }
+        }
+      },
     );
   }
 
