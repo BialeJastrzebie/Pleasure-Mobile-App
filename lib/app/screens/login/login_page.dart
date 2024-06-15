@@ -61,9 +61,12 @@ class _LoginPageState extends State<LoginPage> {
                     if (_formKey.currentState!.validate()) {
                       // If the form is valid, display a Snackbar and authenticate the user.
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          duration: Duration(seconds: 1),
-                          content: Center(
+                        SnackBar(
+                          duration: const  Duration(seconds: 1),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          content: const Center(
                             child: Text(
                                 style: TextStyle(
                                   fontSize: 20,
@@ -78,9 +81,12 @@ class _LoginPageState extends State<LoginPage> {
                               _passwordController.text)
                           .then((value) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            duration: Duration(seconds: 3),
-                            content: Center(
+                          SnackBar(
+                            duration: const Duration(seconds: 3),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            content: const Center(
                               child: Text(
                                 'Zalogowano pomyślnie',
                                 style: TextStyle(
