@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:pleasure_mobile_app/app/screens/login/widgets/email_input.dart';
@@ -229,4 +230,16 @@ Future<dynamic> postData(String url, Map<String, dynamic> data) async {
   } else {
     throw Exception('Failed to post data');
   }
+}
+
+Future<bool> checkInternetConnection() async {
+  try {
+    final result = await InternetAddress.lookup('google.com');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      return true;
+    }
+  } on SocketException catch (_) {
+    return false;
+  }
+  return false;
 }

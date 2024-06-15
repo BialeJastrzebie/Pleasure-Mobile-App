@@ -13,7 +13,7 @@ class DescriptionText extends StatelessWidget {
         padding: const EdgeInsets.only(top: 25),
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
-          height: MediaQuery.of(context).size.height * 0.45,
+          height: MediaQuery.of(context).size.height * 0.44,
           child: AutoSizeText(
             description,
             style: const TextStyle(

@@ -12,7 +12,7 @@ class CouponInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.55,
-      height: MediaQuery.of(context).size.height * 0.1,
+      height: MediaQuery.of(context).size.height * 0.09,
       decoration: BoxDecoration(
         color: buttonColorMenu,
         borderRadius: BorderRadius.circular(9.0),

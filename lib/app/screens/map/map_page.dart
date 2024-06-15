@@ -182,6 +182,7 @@ class MapPageState extends State<MapPage> {
               address: element['address'],
               couponInfo: element['coupon'],
               urlPageButton: element['url'],
+              navLocation: location,
               updateFavouriteLocations: updateFavouriteLocations,
             ),
             Curves.fastLinearToSlowEaseIn);
