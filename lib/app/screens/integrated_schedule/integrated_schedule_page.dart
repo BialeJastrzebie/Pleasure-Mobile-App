@@ -1,30 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
-import 'widgets/integrated_schedule_box.dart';
-import 'widgets/date_integrate.dart'; // Import nowego pliku
 
-class IntegratedSchedulePage extends StatelessWidget {
-  const IntegratedSchedulePage({Key? key}) : super(key: key);
+class IntegratedSchedulePage extends StatefulWidget {
+  const IntegratedSchedulePage({super.key});
 
   @override
+  IntegratedSchedulePageState createState() => IntegratedSchedulePageState();
+}
+
+class IntegratedSchedulePageState extends State<IntegratedSchedulePage> {
+  @override
   Widget build(BuildContext context) {
-    return BaseView(
-      body: Center(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
-          child: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 20),
-              DateIntegrate(),
-              SizedBox(height: 10),
-              IntegratedScheduleBox(),
-              SizedBox(height: 10),
-              IntegratedScheduleBox(),
-            ],
-          ),
-        ),
-      ),
+    return const BaseView(
+        body: Center(
+          child: Text('IntegratedSchedulePage goes here'),
+        )
     );
   }
 }
