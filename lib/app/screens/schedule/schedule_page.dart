@@ -46,6 +46,7 @@ class SchedulePageState extends State<SchedulePage> {
         String subject = '';
 
         return AlertDialog(
+          backgroundColor: backgroundColor,
           title: Text('Dodaj lekcję'),
           content: Column(
             mainAxisSize: MainAxisSize.min,

@@ -56,7 +56,7 @@ class _ScheduleBoxState extends State<ScheduleBox> {
                     children: [
                       Text(
                         widget.startTime,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: checkBox,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
@@ -65,7 +65,7 @@ class _ScheduleBoxState extends State<ScheduleBox> {
                       SizedBox(height: 5.0),
                       Text(
                         widget.endTime,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: checkBox,
                           fontSize: 16.0,
                         ),
@@ -82,7 +82,7 @@ class _ScheduleBoxState extends State<ScheduleBox> {
                     children: [
                       Text(
                         widget.subject,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: checkBox,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
@@ -93,7 +93,7 @@ class _ScheduleBoxState extends State<ScheduleBox> {
                       SizedBox(height: 5.0),
                       Text(
                         widget.sala,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: checkBox,
                           fontSize: 16.0,
                         ),
@@ -110,7 +110,7 @@ class _ScheduleBoxState extends State<ScheduleBox> {
                           !editing; // Przełącz tryb edycji po kliknięciu w ikonę trzech kropek
                     });
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.more_horiz,
                     color: checkBox,
                   ),

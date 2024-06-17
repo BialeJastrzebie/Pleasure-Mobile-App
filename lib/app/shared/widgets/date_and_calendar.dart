@@ -26,6 +26,7 @@ class DateAndCalendar extends StatelessWidget {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
+                  backgroundColor: backgroundColor,
                   title: Text('Wybierz dzień'),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -119,15 +120,9 @@ class DateAndCalendar extends StatelessWidget {
             day); // Wywołaj funkcję zwrotną, aby zaktualizować wybrany dzień
         Navigator.of(context).pop(); // Zamknij dialog
       },
-     style: TextButton.styleFrom(
-        foregroundColor: Colors.white, backgroundColor: backgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
       child: Text(day,
           style:
-              TextStyle(color: Colors.white)),
+              const TextStyle(color: Colors.white)),
     );
   }
 }

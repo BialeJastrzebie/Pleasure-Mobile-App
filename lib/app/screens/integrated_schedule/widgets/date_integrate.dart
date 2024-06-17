@@ -22,6 +22,7 @@ class _DateIntegrateState extends State<DateIntegrate> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
+                  backgroundColor: backgroundColor,
                   title: Text('Wybierz dzień'),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -100,7 +101,8 @@ class _DateIntegrateState extends State<DateIntegrate> {
         });
         Navigator.of(context).pop(); // Zamknij dialog
       },
-      child: Text(day),
+      child: Text(day,
+      style: const TextStyle(color: Colors.white),),
     );
   }
 }
