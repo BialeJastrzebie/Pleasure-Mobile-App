@@ -18,9 +18,15 @@ class IntegratedSchedulePage extends StatelessWidget {
               SizedBox(height: 20),
               DateIntegrate(),
               SizedBox(height: 10),
-              IntegratedScheduleBox(),
+              IntegratedScheduleBox(
+                time: '9:00',
+                participants: 'Igor Frątczak, Krystian Juszczyk',
+              ),
               SizedBox(height: 10),
-              IntegratedScheduleBox(),
+              IntegratedScheduleBox(
+                time: '10:00',
+                participants: 'Anna Kowalska, Jan Nowak',
+              ),
             ],
           ),
         ),

@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../../shared/themes/theme.dart';
+
 class IntegratedScheduleBox extends StatelessWidget {
-  const IntegratedScheduleBox({Key? key}) : super(key: key);
+  final String time;
+  final String participants;
+
+  const IntegratedScheduleBox({
+    Key? key,
+    required this.time,
+    required this.participants,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +43,10 @@ class IntegratedScheduleBox extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  '9:00',
-                  style: TextStyle(
+                  time,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: darkerWhiteTextColor,
-
                   ),
                 ),
               ),
@@ -49,7 +56,7 @@ class IntegratedScheduleBox extends StatelessWidget {
             left: 12.0,
             top: MediaQuery.of(context).size.height * 0.06,
             child: Text(
-              'Igor Frątczak, Krystian Juszczyk',
+              participants,
               style: TextStyle(
                 color: backgroundColor,
               ),

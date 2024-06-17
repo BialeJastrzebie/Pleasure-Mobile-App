@@ -22,7 +22,13 @@ class _DateIntegrateState extends State<DateIntegrate> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text('Wybierz dzień'),
+                  backgroundColor: backgroundColor, // Ciemnoczerwone tło
+                  title: Center(
+                    child: Text(
+                      'Wybierz dzień',
+                      style: TextStyle(color: Colors.white), // Biały tekst
+                    ),
+                  ),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -42,7 +48,7 @@ class _DateIntegrateState extends State<DateIntegrate> {
             width: MediaQuery.of(context).size.width * 0.15,
             height: MediaQuery.of(context).size.width * 0.15,
             decoration: BoxDecoration(
-              color: backgroundColor,
+              color: backgroundColor, // Ciemnoczerwone tło
               borderRadius: BorderRadius.circular(10.0),
               boxShadow: [
                 BoxShadow(
@@ -67,7 +73,7 @@ class _DateIntegrateState extends State<DateIntegrate> {
           width: MediaQuery.of(context).size.width * 0.4,
           height: MediaQuery.of(context).size.width * 0.15,
           decoration: BoxDecoration(
-            color: backgroundColor,
+            color: backgroundColor, // Ciemnoczerwone tło
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
               BoxShadow(
@@ -83,7 +89,7 @@ class _DateIntegrateState extends State<DateIntegrate> {
               selectedDay,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: darkerWhiteTextColor,
+                color: Colors.white, // Biały tekst
               ),
             ),
           ),
@@ -100,7 +106,10 @@ class _DateIntegrateState extends State<DateIntegrate> {
         });
         Navigator.of(context).pop(); // Zamknij dialog
       },
-      child: Text(day),
+      child: Text(
+        day,
+        style: TextStyle(color: Colors.white), // Biały tekst
+      ),
     );
   }
 }

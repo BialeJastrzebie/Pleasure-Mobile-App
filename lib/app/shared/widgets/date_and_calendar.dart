@@ -25,7 +25,11 @@ class DateAndCalendar extends StatelessWidget {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text('Wybierz dzień'),
+                  backgroundColor: backgroundColor, // Kolor tła
+                  title: Text(
+                    'Wybierz dzień',
+                    style: TextStyle(color: Colors.white), // Kolor tekstu
+                  ),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -86,7 +90,7 @@ class DateAndCalendar extends StatelessWidget {
               selectedDay,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                color: darkerWhiteTextColor,
+                color: darkerWhiteTextColor, // Kolor tekstu
               ),
             ),
           ),
@@ -102,7 +106,7 @@ class DateAndCalendar extends StatelessWidget {
           ),
           child: IconButton(
             onPressed: onAddLesson,
-            icon: Icon(Icons.add, color: Colors.white),
+            icon: Icon(Icons.add, color: Colors.white), // Kolor ikony
           ),
         ),
       ],
@@ -115,7 +119,10 @@ class DateAndCalendar extends StatelessWidget {
         onDaySelected(day); // Wywołaj funkcję zwrotną, aby zaktualizować wybrany dzień
         Navigator.of(context).pop(); // Zamknij dialog
       },
-      child: Text(day),
+      child: Text(
+        day,
+        style: TextStyle(color: Colors.white), // Kolor tekstu
+      ),
     );
   }
 }
