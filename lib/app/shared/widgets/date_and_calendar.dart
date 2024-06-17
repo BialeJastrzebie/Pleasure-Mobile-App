@@ -7,11 +7,11 @@ class DateAndCalendar extends StatelessWidget {
   final Function() onAddLesson; // Dodana funkcja do dodawania lekcji
 
   const DateAndCalendar({
-    Key? key,
+    super.key,
     required this.selectedDay,
     required this.onDaySelected,
     required this.onAddLesson,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +19,7 @@ class DateAndCalendar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const Padding(padding: EdgeInsets.only(left: 15)),
         GestureDetector(
           onTap: () {
             showDialog(
@@ -93,6 +94,7 @@ class DateAndCalendar extends StatelessWidget {
         ),
         const Spacer(),
         Container(
+          padding: const EdgeInsets.only(right: 5),
           width: 40,
           height: 40,
           decoration: BoxDecoration(
@@ -105,6 +107,7 @@ class DateAndCalendar extends StatelessWidget {
             icon: Icon(Icons.add, color: Colors.white),
           ),
         ),
+        const Padding(padding: EdgeInsets.only(right: 15)),
       ],
     );
   }
@@ -112,10 +115,19 @@ class DateAndCalendar extends StatelessWidget {
   Widget _buildDayButton(BuildContext context, String day) {
     return TextButton(
       onPressed: () {
-        onDaySelected(day); // Wywołaj funkcję zwrotną, aby zaktualizować wybrany dzień
+        onDaySelected(
+            day); // Wywołaj funkcję zwrotną, aby zaktualizować wybrany dzień
         Navigator.of(context).pop(); // Zamknij dialog
       },
-      child: Text(day),
+     style: TextButton.styleFrom(
+        foregroundColor: Colors.white, backgroundColor: backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
+      child: Text(day,
+          style:
+              TextStyle(color: Colors.white)),
     );
   }
 }
