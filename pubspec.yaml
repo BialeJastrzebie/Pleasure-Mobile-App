@@ -130,6 +130,5 @@ flutter:
     - android/gradle/wrapper/
     - android/.gradle/
     - android/.gradle/vcs-1/
-#    flu
     - android/app/build.gradle
     - images/

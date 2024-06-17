@@ -36,7 +36,7 @@ class _SearchInputBoxState extends State<SearchInputBox> {
 
   navigateToLocation(LatLng location) async {
     final GoogleMapController controller = await widget.mapControllerFuture;
-    controller.animateCamera(CameraUpdate.newLatLng(location));
+    controller.animateCamera(CameraUpdate.newLatLngZoom(location, 20));
   }
 
   @override
@@ -96,9 +96,29 @@ class _SearchInputBoxState extends State<SearchInputBox> {
               },
               onSubmitted: (value) async {
                 LatLng location = await getLocationForPlace(value);
-                navigateToLocation(location);
-                widget.panelController.close();
-                SystemChannels.textInput.invokeMethod('TextInput.hide');
+                if (location == const LatLng(0, 0)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(seconds: 3),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      content: const Center(
+                        child: Text(
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.black87,
+                            ),
+                            'Nie znaleziono takiego miejsca!'),
+                      ),
+                    ),
+                  );
+                } else {
+                  await navigateToLocation(location);
+                  widget.panelController.close();
+                  SystemChannels.textInput.invokeMethod('TextInput.hide');
+                }
               },
             );
           },
@@ -147,15 +167,18 @@ class _SearchInputBoxState extends State<SearchInputBox> {
 
   Future<LatLng> getLocationForPlace(String markerId) async {
     var allLocations =
-        await fetchData('http://localhost:8000/api/map/locations/');
-    var location = allLocations.firstWhere((element) =>
+    await fetchData('http://localhost:8000/api/map/locations/');
+    var location = allLocations.firstWhere(
+            (element) =>
         element['name'].toString().toLowerCase() ==
-        markerId.toString().toLowerCase());
-    var latitude = double.parse(location['latitude']);
-    var longitude = double.parse(location['longitude']);
-    if (mounted) {
-      // Check if the widget is still in the tree
-      return LatLng(latitude, longitude);
+            markerId.toString().toLowerCase(),
+        orElse: () => null);
+    if (location != null) {
+      var latitude = double.parse(location['latitude']);
+      var longitude = double.parse(location['longitude']);
+      if (mounted) {
+        return LatLng(latitude, longitude);
+      }
     }
     return const LatLng(0, 0);
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inner_shadow_widget/inner_shadow_widget.dart';
+import 'package:pleasure_mobile_app/app/screens/login/login_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class URLPageButton extends StatelessWidget {
@@ -9,17 +10,39 @@ class URLPageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.link),
-      iconSize: 80,
-      color: Colors.blue[400],
-      onPressed: () async {
-        if (await canLaunchUrl(Uri.parse(link))) {
-          await launchUrl(Uri.parse(link));
-        } else {
-          throw 'Could not launch $link';
-        }
-      },
+    return Column(
+      children: [
+        Text(
+          'WWW',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: Colors.blue[400],
+            shadows: const [
+              Shadow(
+                color: Colors.black12,
+                blurRadius: 2,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+        ),
+        Transform.translate(
+          offset: const Offset(0, -15),
+          child: IconButton(
+            icon: const Icon(Icons.link),
+            iconSize: 70,
+            color: Colors.blue[400],
+            onPressed: () async {
+              if (await canLaunchUrl(Uri.parse(link))) {
+                await launchUrl(Uri.parse(link));
+              } else {
+                throw 'Could not launch $link';
+              }
+            },
+          ),
+        ),
+      ],
     );
   }
 }

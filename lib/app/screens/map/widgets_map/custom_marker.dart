@@ -25,9 +25,11 @@ class CustomMarker extends StatelessWidget {
                     width: 2,
                   ),
                 ),
-                width: 200, // match the width of the image
+                width: 210,
                 child: AutoSizeText(
                   markerId,
+                  minFontSize: 14,
+                  maxFontSize: 35,
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 40,

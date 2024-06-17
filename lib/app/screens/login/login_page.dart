@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:pleasure_mobile_app/app/screens/login/widgets/email_input.dart';
 import 'package:pleasure_mobile_app/app/screens/login/widgets/password_input.dart';
 import 'package:pleasure_mobile_app/app/shared/themes/theme.dart';
-import 'package:pleasure_mobile_app/app/shared/widgets/base_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -199,12 +199,44 @@ Future<dynamic> patchData(String url, Map<String, dynamic> data) async {
     },
     body: jsonString,
   );
-  print(response.body);
-  print(response.statusCode);
+
   if (response.statusCode == 200) {
     String responseBody = utf8.decode(response.bodyBytes);
     return jsonDecode(responseBody);
   } else {
     throw Exception('Failed to patch data');
   }
+}
+
+Future<dynamic> postData(String url, Map<String, dynamic> data) async {
+  String token = await getToken();
+  String jsonString = jsonEncode(data);
+
+  final response = await http.post(
+    Uri.parse(url),
+    headers: <String, String>{
+      'Authorization': 'Token $token',
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonString,
+  );
+
+  if (response.statusCode == 201) {
+    String responseBody = utf8.decode(response.bodyBytes);
+    return jsonDecode(responseBody);
+  } else {
+    throw Exception('Failed to post data');
+  }
+}
+
+Future<bool> checkInternetConnection() async {
+  try {
+    final result = await InternetAddress.lookup('google.com');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      return true;
+    }
+  } on SocketException catch (_) {
+    return false;
+  }
+  return false;
 }
