@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
-import '../themes/theme.dart'; // Zakładając, że 'themes/theme.dart' jest dostępny w odpowiednim miejscu
+import '../../../shared/themes/theme.dart'; // Zakładając, że 'themes/theme.dart' jest dostępny w odpowiednim miejscu
 
-class DateAndCalendar extends StatelessWidget {
-  final String selectedDay;
-  final Function(String) onDaySelected;
-  final Function() onAddLesson; // Dodana funkcja do dodawania lekcji
+class DateIntegrate extends StatefulWidget {
+  const DateIntegrate({Key? key}) : super(key: key);
 
-  const DateAndCalendar({
-    Key? key,
-    required this.selectedDay,
-    required this.onDaySelected,
-    required this.onAddLesson,
-  }) : super(key: key);
+  @override
+  _DateIntegrateState createState() => _DateIntegrateState();
+}
+
+class _DateIntegrateState extends State<DateIntegrate> {
+  String selectedDay = 'Piątek'; // Domyślnie ustawiamy na 'Piątek'
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         GestureDetector(
@@ -65,7 +62,7 @@ class DateAndCalendar extends StatelessWidget {
             ),
           ),
         ),
-        const Spacer(),
+        SizedBox(width: 40),
         Container(
           width: MediaQuery.of(context).size.width * 0.4,
           height: MediaQuery.of(context).size.width * 0.15,
@@ -84,25 +81,11 @@ class DateAndCalendar extends StatelessWidget {
           child: Center(
             child: Text(
               selectedDay,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: darkerWhiteTextColor,
               ),
             ),
-          ),
-        ),
-        const Spacer(),
-        Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(20.0),
-            border: Border.all(color: Colors.white, width: 2.0),
-          ),
-          child: IconButton(
-            onPressed: onAddLesson,
-            icon: Icon(Icons.add, color: Colors.white),
           ),
         ),
       ],
@@ -112,7 +95,9 @@ class DateAndCalendar extends StatelessWidget {
   Widget _buildDayButton(BuildContext context, String day) {
     return TextButton(
       onPressed: () {
-        onDaySelected(day); // Wywołaj funkcję zwrotną, aby zaktualizować wybrany dzień
+        setState(() {
+          selectedDay = day; // Ustaw wybrany dzień na kliknięty dzień
+        });
         Navigator.of(context).pop(); // Zamknij dialog
       },
       child: Text(day),
