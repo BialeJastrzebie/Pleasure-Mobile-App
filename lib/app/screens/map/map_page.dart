@@ -162,7 +162,7 @@ class MapPageState extends State<MapPage> {
     String category = element['category'];
     String pathToImage = element['image'];
     // BitmapDescriptor markerIcon = await chooseIcon(category);
-    var marker = Marker(
+    /*var marker = Marker(
       markerId: MarkerId(markerID),
       position: location,
       icon: await CustomMarker(
@@ -176,7 +176,7 @@ class MapPageState extends State<MapPage> {
         animateScreenChange(
             context,
             MarkerDetailsPage(
-              markerId: markerID,
+              markerId: markerID,km
               image: pathToImage,
               description: element['description'],
               address: element['address'],
@@ -192,7 +192,7 @@ class MapPageState extends State<MapPage> {
     setState(() {
       _allMarkers[markerID] = marker;
       _markerCategories[markerID] = category;
-    });
+    });*/
   }
 
   updateFavouriteLocations() async {
