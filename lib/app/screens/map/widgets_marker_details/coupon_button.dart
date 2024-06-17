@@ -21,6 +21,7 @@ class _CouponButtonState extends State<CouponButton> {
   void initState() {
     super.initState();
     checkIfReceived(widget.markerId).then((value) {
+      print(value);
       setState(() {
         _isClicked = value;
       });
@@ -56,6 +57,23 @@ class _CouponButtonState extends State<CouponButton> {
                 backgroundColor: _isClicked ? secondaryColor : buttonColor,
                 onPressed: () async {
                   if(_isClicked) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          duration: const Duration(seconds: 2),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          content: const Center(
+                            child: Text(
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.black87,
+                                ),
+                                'Kupon już został odebrany!'),
+                          ),
+                        ),
+                    );
                     return;
                   }
                   addToReceived(widget.markerId);

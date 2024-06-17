@@ -78,7 +78,7 @@ class MapPageState extends State<MapPage> {
     ]);
     _favouriteLocations = results[0];
 
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 3));
     setState(() {
       isLoading = false;
     });
